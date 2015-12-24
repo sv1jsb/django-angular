@@ -26,7 +26,7 @@ then calls django's collectstatic ignoring the static/javascripts directory.
 [Node.js](http://nodejs.org/).*
 
 * Fork this repository.
-* `$ git clone git@bitbucket.org:sv1jsb/django-angular.git`
+* `$ git clone https://github.com/sv1jsb/django-angular.git`
 * `$ mkvirtualenv djangular`
 * `$ cd django-angular`
 * `$ pip install -r requirements.txt`
@@ -34,5 +34,4 @@ then calls django's collectstatic ignoring the static/javascripts directory.
 * `$ npm install -g gulp`   (as root)
 * `$ npm install`
 * `$ bower install`
-* `$ python manage.py migrate`
 * `$ python manage.py runserver`
