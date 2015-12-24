@@ -15,6 +15,7 @@ INTERNAL_IPS = ('127.0.0.1',)
 INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.staticfiles',
+    'mongo_auth',
     'rest_framework',
     'rest_framework_mongoengine',
     'authentication',
@@ -99,5 +100,5 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 ALLOWED_HOSTS = ['*']
 
 AUTHENTICATION_BACKENDS = ('mongo_auth.backend.CustomBackend', )
-AUTH_USER_MODEL = 'authentication.models.User'
+AUTH_USER_MODEL = 'authentication.User'
 SESSION_ENGINE = 'mongo_sessions.engine'
