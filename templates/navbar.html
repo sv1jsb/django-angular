@@ -16,9 +16,9 @@
                 <!-- User is authenticated -->
                     {% verbatim %}
                     <li ng-class="{active: navbarCtrl.location == '/+' + auth.getAuthenticatedAccount().id}" ng-show="auth.isAuthenticated()"><a
-                            href="/+{{auth.getAuthenticatedAccount().id }}">+{{ auth.getAuthenticatedAccount().username }}</a></li>
+                            href="/profile/+{{auth.getAuthenticatedAccount().id }}">+{{ auth.getAuthenticatedAccount().username }}</a></li>
                     <li ng-class="{active: navbarCtrl.location == '/+' + auth.getAuthenticatedAccount().id +'/settings'}" ng-show="auth.isAuthenticated()"><a
-                            href="/+{{ auth.getAuthenticatedAccount().id }}/settings">Settings</a></li>
+                            href="/profile/+{{ auth.getAuthenticatedAccount().id }}/settings">Settings</a></li>
                     <li><a href="javascript:void(0)" ng-click="navbarCtrl.logout()" ng-show="auth.isAuthenticated()">Logout</a></li>
                     {% endverbatim %}
                 <!-- User is anonymous -->

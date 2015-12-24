@@ -27,12 +27,12 @@
                 controllerAs: 'indexCtrl',
                 templateUrl: '/static/templates/layout/index.html'
             })
-            .when('/+:user_id', {
+            .when('/profile/+:user_id', {
                 controller: 'ProfileController',
                 controllerAs: 'profileCtrl',
                 templateUrl: '/static/templates/profiles/profile.html'
             })
-            .when('/+:user_id/settings', {
+            .when('/profile/+:user_id/settings', {
                 controller: 'ProfileSettingsController',
                 controllerAs: 'profileSettingsCtrl',
                 templateUrl: '/static/templates/profiles/settings.html'
