@@ -1,0 +1,31 @@
+<nav class="navbar navbar-default" role="navigation" ng-controller="NavbarController as navbarCtrl" ng-cloak>
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#django-angular-nav">
+                <span class="sr-only">Toggle Navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Django-Angular Posts</a>
+        </div> <!-- ./navbar-header -->
+
+        <div class="collapse navbar-collapse" id="django-angular-nav" ng-cloak>
+            <ul class="nav navbar-nav pull-right">
+                <!-- User is authenticated -->
+                    {% verbatim %}
+                    <li ng-class="{active: navbarCtrl.location == '/+' + auth.getAuthenticatedAccount().id}" ng-show="auth.isAuthenticated()"><a
+                            href="/+{{auth.getAuthenticatedAccount().id }}">+{{ auth.getAuthenticatedAccount().username }}</a></li>
+                    <li ng-class="{active: navbarCtrl.location == '/+' + auth.getAuthenticatedAccount().id +'/settings'}" ng-show="auth.isAuthenticated()"><a
+                            href="/+{{ auth.getAuthenticatedAccount().id }}/settings">Settings</a></li>
+                    <li><a href="javascript:void(0)" ng-click="navbarCtrl.logout()" ng-show="auth.isAuthenticated()">Logout</a></li>
+                    {% endverbatim %}
+                <!-- User is anonymous -->
+                    <li ng-class="{active: navbarCtrl.location == '/login'}" ng-hide="auth.isAuthenticated()"><a href="/login">Login</a></li>
+                    <li ng-class="{active: navbarCtrl.location == '/register'}" ng-hide="auth.isAuthenticated()"><a href="/register">Register</a></li>
+
+            </ul>
+        </div>
+    </div>
+</nav>

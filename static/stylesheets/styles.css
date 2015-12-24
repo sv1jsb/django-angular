@@ -1,0 +1,33 @@
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+.no-posts-here {
+    text-align: center;
+}
+
+.post {
+}
+
+.post .post__meta {
+    font-weight: bold;
+    text-align: right;
+    padding-bottom: 19px;
+}
+
+.post .post__edit {
+    padding-bottom: 19px;
+}
+
+.post .post__meta a:hover {
+    text-decoration: none;
+}
+
+.post .post__content {
+    word-wrap: break-word;
+}
+
+.btn-add-new-post {
+    position: fixed !important;
+    bottom: 20px;
+    right: 20px;
+}

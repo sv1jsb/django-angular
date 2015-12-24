@@ -1,0 +1,16 @@
+<div class="profile" ng-show="profileCtrl.profile">
+    <div class="jumbotron profile__header">
+        <div class="row">
+            <div class="col-xs-8">
+                <h1 class="profile__username">+{{ profileCtrl.profile.username }}</h1>
+            </div>
+            <div class="col-xs-4">
+                <p class="lead pull-right">{{ profileCtrl.profile.first_name }} {{ profileCtrl.profile.last_name }}</p>
+            </div>
+        </div>
+
+        <p class="profile__tagline">{{ profileCtrl.profile.tagline }}</p>
+    </div>
+
+    <posts posts="profileCtrl.posts"></posts>
+</div>

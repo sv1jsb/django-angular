@@ -1,0 +1,69 @@
+<div class="col-xs-6 col-xs-offset-3">
+    <div class="well" ng-show="profileSettingsCtrl.profile">
+        <form role="form" class="settings" ng-submit="profileSettingsCtrl.update()">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="alert alert-danger" ng-show="error" ng-bind="error"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label for="settings__email">Email</label>
+                        <input type="text" class="form-control" id="settings__email"
+                               ng-model="profileSettingsCtrl.profile.email" placeholder="ex. john@example.com"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="settings__password">New Password</label>
+                        <input type="password" class="form-control" id="settings__password"
+                               ng-model="profileSettingsCtrl.profile.password" placeholder="ex. mylongpassword"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="settings__confirm-password">Confirm Password</label>
+                        <input type="password" class="form-control" id="settings__confirm-password"
+                               ng-model="profileSettingsCtrl.profile.confirm_password" placeholder="ex. mylongpassword"/>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label for="settings__username">Username</label>
+                        <input type="text" class="form-control" id="settings__username"
+                               ng-model="profileSettingsCtrl.profile.username" placeholder="ex. john123"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="settings__first_name">First name</label>
+                        <input type="text" class="form-control" id="settings__first_name"
+                               ng-model="profileSettingsCtrl.profile.first_name" placeholder="ex. John"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="settings__last_name">Last name</label>
+                        <input type="text" class="form-control" id="settings__last_name"
+                               ng-model="profileSettingsCtrl.profile.last_name" placeholder="ex. Do"/>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+            <div class="form-group">
+                <label for="settings__tagline">Tagline</label>
+                <textarea class="form-control" id="settings__tagline" ng-model="profileSettingsCtrl.profile.tagline"
+                          placeholder="ex. This is Not Google Plus."/>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-raised profile-btn">Submit</button>
+                <button type="button" class="btn btn-danger pull-right btn-raised profile-btn" ng-really-message="Are you sure?"
+                        ng-really-click="profileSettingsCtrl.destroy()">Delete Account
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    $.material.ripples(".profile-btn");
+</script>

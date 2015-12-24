@@ -1,0 +1,21 @@
+<form role="form" ng-submit="editPostCtrl.submit()">
+    <legend>Edit Post</legend>
+    <div class="alert alert-danger" ng-show="error" ng-bind="error"></div>
+    <div class="form-group">
+        <label for="post__content">Content</label>
+        <textarea class="form-control"
+                  id="post__content"
+                  rows="3"
+                  ng-model="editPostCtrl.post.content">
+        </textarea>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-raised" id="edit-post-btn">
+            Post it
+        </button>
+    </div>
+</form>
+<script>
+    $.material.ripples("#edit-post-btn");
+</script>

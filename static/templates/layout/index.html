@@ -1,0 +1,11 @@
+<posts posts="indexCtrl.posts" ng-show="indexCtrl.posts && indexCtrl.posts.length"></posts>
+<a class="btn btn-primary btn-fab btn-raised btn-add-new-post" id="add-post-btn"
+        href="javascript:void(0)"
+        ng-show="indexCtrl.isAuthenticated"
+        ng-dialog="/static/templates/posts/new-post.html"
+        ng-dialog-controller="NewPostController as newPostCtrl">
+    <i class="material-icons">add</i>
+</a>
+<script>
+    $.material.ripples("#add-post-btn");
+</script>
