@@ -31,7 +31,7 @@ then calls django's collectstatic ignoring the static/javascripts directory.
 * `$ cd django-angular`
 * `$ pip install -r requirements.txt`
 * `$ npm install -g bower`  (as root)
-* `$ npm install -g gulp`   (as root)
+* `$ npm install -g gulp-cli`   (as root)
 * `$ npm install`
 * `$ bower install`
 * `$ python manage.py runserver`
