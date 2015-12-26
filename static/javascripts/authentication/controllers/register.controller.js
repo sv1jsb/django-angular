@@ -9,12 +9,12 @@
         .module('django-angular.authentication.controllers')
         .controller('RegisterController', RegisterController);
 
-    RegisterController.$inject = ['$location', '$scope', 'Authentication'];
+    RegisterController.$inject = ['$location', '$scope', 'Authentication', 'Material'];
 
     /**
      * @namespace RegisterController
      */
-    function RegisterController($location, $scope, Authentication) {
+    function RegisterController($location, $scope, Authentication, Material) {
         var vm = this;
 
         vm.register = register;
@@ -30,6 +30,7 @@
             if (Authentication.isAuthenticated()) {
                 $location.url('/');
             }
+            Material.init();
         }
 
         /**

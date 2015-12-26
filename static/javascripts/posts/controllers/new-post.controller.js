@@ -12,15 +12,16 @@
         .module('django-angular.posts.controllers')
         .controller('NewPostController', NewPostController);
 
-    NewPostController.$inject = ['$rootScope', '$scope', 'Authentication', 'Snackbar', 'Posts'];
+    NewPostController.$inject = ['$rootScope', '$scope', 'Authentication', 'Snackbar', 'Posts', 'Material'];
 
     /**
      * @namespace NewPostController
      */
-    function NewPostController($rootScope, $scope, Authentication, Snackbar, Posts) {
+    function NewPostController($rootScope, $scope, Authentication, Snackbar, Posts, Material) {
         var vm = this;
 
         vm.submit = submit;
+        vm.content = null;
 
         /**
          * @name submit
@@ -49,7 +50,7 @@
              */
             function createPostErrorFn(data, status, headers, config) {
                 $rootScope.$broadcast('post.created.error');
-                Snackbar.error(data.error);
+                Snackbar.error(data.data.message);
             }
         }
     }

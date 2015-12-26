@@ -13,13 +13,13 @@
         .controller('ProfileSettingsController', ProfileSettingsController);
 
     ProfileSettingsController.$inject = [
-        '$location', '$routeParams', 'Authentication', 'Profile', 'Snackbar', '$scope'
+        '$location', '$routeParams', 'Authentication', 'Profile', 'Snackbar', '$scope', 'Material'
     ];
 
     /**
      * @namespace ProfileSettingsController
      */
-    function ProfileSettingsController($location, $routeParams, Authentication, Profile, Snackbar, $scope) {
+    function ProfileSettingsController($location, $routeParams, Authentication, Profile, Snackbar, $scope, Material) {
         var vm = this;
 
         vm.destroy = destroy;
@@ -49,7 +49,9 @@
                 Snackbar.error('You are not authorized to view this page.');
             }
 
-            Profile.get(user_id).then(profileSuccessFn, profileErrorFn);
+            Profile.get(user_id)
+                .then(profileSuccessFn, profileErrorFn)
+                .finally(Material.init());
 
             /**
              * @name profileSuccessFn
@@ -67,6 +69,7 @@
                 $location.url('/');
                 Snackbar.error('That user does not exist.');
             }
+
         }
 
 

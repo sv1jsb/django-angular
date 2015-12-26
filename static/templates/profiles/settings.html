@@ -8,39 +8,39 @@
             </div>
             <div class="row">
                 <div class="col-xs-6">
-                    <div class="form-group">
-                        <label for="settings__email">Email</label>
+                    <div class="form-group label-floating">
+                        <label for="settings__email" class="control-label">Email</label>
                         <input type="text" class="form-control" id="settings__email"
-                               ng-model="profileSettingsCtrl.profile.email" placeholder="ex. john@example.com"/>
+                               ng-model="profileSettingsCtrl.profile.email"/>
                     </div>
 
-                    <div class="form-group">
-                        <label for="settings__password">New Password</label>
+                    <div class="form-group label-floating">
+                        <label for="settings__password" class="control-label">New Password</label>
                         <input type="password" class="form-control" id="settings__password"
-                               ng-model="profileSettingsCtrl.profile.password" placeholder="ex. mylongpassword"/>
+                               ng-model="profileSettingsCtrl.profile.password"/>
                     </div>
 
-                    <div class="form-group">
-                        <label for="settings__confirm-password">Confirm Password</label>
+                    <div class="form-group label-floating">
+                        <label for="settings__confirm-password" class="control-label">Confirm Password</label>
                         <input type="password" class="form-control" id="settings__confirm-password"
-                               ng-model="profileSettingsCtrl.profile.confirm_password" placeholder="ex. mylongpassword"/>
+                               ng-model="profileSettingsCtrl.profile.confirm_password"/>
                     </div>
                 </div>
                 <div class="col-xs-6">
-                    <div class="form-group">
-                        <label for="settings__username">Username</label>
+                    <div class="form-group label-floating">
+                        <label for="settings__username" class="control-label">Username</label>
                         <input type="text" class="form-control" id="settings__username"
-                               ng-model="profileSettingsCtrl.profile.username" placeholder="ex. john123"/>
+                               ng-model="profileSettingsCtrl.profile.username"/>
                     </div>
-                    <div class="form-group">
-                        <label for="settings__first_name">First name</label>
+                    <div class="form-group label-floating">
+                        <label for="settings__first_name" class="control-label">First name</label>
                         <input type="text" class="form-control" id="settings__first_name"
-                               ng-model="profileSettingsCtrl.profile.first_name" placeholder="ex. John"/>
+                               ng-model="profileSettingsCtrl.profile.first_name"/>
                     </div>
-                    <div class="form-group">
-                        <label for="settings__last_name">Last name</label>
+                    <div class="form-group label-floating">
+                        <label for="settings__last_name" class="control-label">Last name</label>
                         <input type="text" class="form-control" id="settings__last_name"
-                               ng-model="profileSettingsCtrl.profile.last_name" placeholder="ex. Do"/>
+                               ng-model="profileSettingsCtrl.profile.last_name"/>
                     </div>
 
                 </div>
@@ -49,10 +49,9 @@
 
 
 
-            <div class="form-group">
-                <label for="settings__tagline">Tagline</label>
-                <textarea class="form-control" id="settings__tagline" ng-model="profileSettingsCtrl.profile.tagline"
-                          placeholder="ex. This is Not Google Plus."/>
+            <div class="form-group label-floating">
+                <label for="settings__tagline" class="control-label">Tagline</label>
+                <textarea class="form-control" id="settings__tagline" ng-model="profileSettingsCtrl.profile.tagline"/>
             </div>
 
             <div class="form-group">
@@ -64,6 +63,3 @@
         </form>
     </div>
 </div>
-<script>
-    $.material.ripples(".profile-btn");
-</script>

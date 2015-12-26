@@ -12,12 +12,12 @@
         .module('django-angular.authentication.controllers')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$location', '$scope', 'Authentication'];
+    LoginController.$inject = ['$location', '$scope', 'Authentication', 'Material'];
 
     /**
      * @namespace LoginController
      */
-    function LoginController($location, $scope, Authentication) {
+    function LoginController($location, $scope, Authentication, Material) {
         var vm = this;
 
         vm.login = login;
@@ -34,6 +34,7 @@
             if (Authentication.isAuthenticated()) {
                 $location.url('/');
             }
+            Material.init();
         }
 
         /**
