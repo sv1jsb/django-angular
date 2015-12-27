@@ -30,6 +30,7 @@
     function run($http, $rootScope, Authentication) {
         $http.defaults.xsrfHeaderName = 'X-CSRFToken';
         $http.defaults.xsrfCookieName = 'csrftoken';
+        // Assign AUthentication to rootScope so that is available in all templates
         $rootScope.auth = Authentication;
     }
 

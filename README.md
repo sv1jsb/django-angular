@@ -14,7 +14,15 @@ Originally copied from [https://github.com/brwr/thinkster-django-angular-boilerp
 to support full CRUD operations on Posts, updated to latest version of Angular, and fixed all bugs.
  
 Gulp task for javascript files concatenation and minification.
- 
+
+### mongo_sessions
+mongo_sessions is providing the mongodb engine for storing sessions. Copied form mongoengine 0.9 and adapted
+
+### mongo_auth
+mongo_auth is providing an abstract User class and MongoDB persistence. The commands createsuperuser and changepassword are implemented.
+You need to subclass the AbstractUser class, add customizations and login/logout views. 
+
+### gulpstatic 
 The gulpstatic app holds a management command for building static files with gulp first
 then calls django's collectstatic ignoring the static/javascripts directory.
 

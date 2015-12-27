@@ -1,7 +1,6 @@
 /**
  * Created by andreas on 16/12/2015.
- */
-/**
+ *
  * ProfileSettingsController
  * @namespace django-angular.profiles.controllers
  */

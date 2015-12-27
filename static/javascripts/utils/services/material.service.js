@@ -1,7 +1,6 @@
 /**
  * Created by andreas on 26/12/2015.
- */
-/**
+ *
  * Material
  * @namespace django-angular.utils.services
  */

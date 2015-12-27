@@ -1,7 +1,6 @@
 /**
  * Created by andreas on 19/12/2015.
- */
-/**
+ *
  * ngReallyClick
  * @namespace django-angular.utils.directives
  */

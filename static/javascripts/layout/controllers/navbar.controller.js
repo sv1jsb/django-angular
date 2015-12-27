@@ -1,7 +1,6 @@
 /**
  * Created by andreas on 16/12/2015.
- */
-/**
+ *
  * NavbarController
  * @namespace django-angular.layout.controllers
  */
