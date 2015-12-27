@@ -1,10 +1,8 @@
 # coding=utf-8
-import json
-from datetime import datetime
 from django.shortcuts import Http404
-from rest_framework import permissions, status, views, parsers, renderers
+from rest_framework import permissions, status, parsers, renderers
 from rest_framework.response import Response
-from mongo_auth import authenticate, login, logout, update_session_auth_hash
+from mongo_auth import update_session_auth_hash
 from authentication.models import User
 from authentication.permissions import IsAccountOwner
 from authentication.serializers import UserSerializer, UserSerializerNonAuth
@@ -68,38 +66,3 @@ class UsersView(ModelViewSet):
                     'status': 'Failed',
                     'message': 'Update failed with submitted data'
                 }, status=status.HTTP_400_BAD_REQUEST)
-
-
-class LoginView(views.APIView):
-    def post(self, request, format=None):
-        data = json.loads(request.body)
-        email = data.get('email', None)
-        password = data.get('password', None)
-        user = authenticate(email=email, password=password)
-
-        if user is not None:
-            if user.is_active:
-                login(request, user)
-                user.last_login = datetime.utcnow()
-                user.save()
-                serialized = UserSerializer(user)
-                return Response(serialized.data)
-            else:
-                return Response({
-                    'status': 'Unauthorized',
-                    'message': 'This account has been disabled.'
-                }, status=status.HTTP_401_UNAUTHORIZED)
-        else:
-            return Response({
-                'status': 'Unauthorized',
-                'message': 'Username/password combination invalid.'
-            }, status=status.HTTP_401_UNAUTHORIZED)
-
-
-class LogoutView(views.APIView):
-    permission_classes = (permissions.IsAuthenticated,)
-
-    def post(self, request, format=None):
-        logout(request)
-
-        return Response({}, status=status.HTTP_204_NO_CONTENT)

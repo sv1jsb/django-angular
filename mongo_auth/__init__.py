@@ -1,6 +1,7 @@
 # _*_ coding: utf-8 _*_
 import inspect
 import re
+import importlib
 from bson import ObjectId
 from django.apps import apps as django_apps
 from django.conf import settings
@@ -151,13 +152,25 @@ def get_user_model():
     Returns the User model that is active in this project.
     """
     try:
-        return django_apps.get_model(settings.AUTH_USER_MODEL)
-    except ValueError:
+        app_label, model_name = settings.AUTH_USER_MODEL.split('.')
+        return getattr(importlib.import_module("%s.models" % app_label), model_name)
+    except ImportError:
+        raise ImproperlyConfigured("Could not import %s" % settings.AUTH_USER_MODEL)
+    except AttributeError:
         raise ImproperlyConfigured("AUTH_USER_MODEL must be of the form 'app_label.model_name'")
-    except LookupError:
-        raise ImproperlyConfigured(
-            "AUTH_USER_MODEL refers to model '%s' that has not been installed" % settings.AUTH_USER_MODEL
-        )
+
+
+def get_user_serialiser():
+    """
+    Returns the User model serializer that is active in this project.
+    """
+    try:
+        app_label, serializer_name = settings.AUTH_USER_MODEL_SERIALIZER.split('.')
+        return getattr(importlib.import_module("%s.serializers" % app_label), serializer_name)
+    except ImportError:
+        raise ImproperlyConfigured("Could not import %s" % settings.AUTH_USER_MODEL_SERIALIZER)
+    except AttributeError:
+        raise ImproperlyConfigured("AUTH_USER_MODEL_SERIALIZER must be of the form 'app_label.serializer_name'")
 
 
 def get_user(request):
@@ -177,7 +190,7 @@ def get_user(request):
             backend = load_backend(backend_path)
             user = backend.get_user(user_id)
             # Verify the session
-            if ('django.contrib.auth.middleware.SessionAuthenticationMiddleware'
+            if ('mongo_auth.middleware.SessionAuthenticationMiddleware'
                     in settings.MIDDLEWARE_CLASSES and hasattr(user, 'get_session_auth_hash')):
                 session_hash = request.session.get(HASH_SESSION_KEY)
                 session_hash_verified = session_hash and constant_time_compare(

@@ -1,16 +1,15 @@
 # _*_ coding: utf-8 _*_
-from authentication.models import User
+from mongo_auth import get_user_model
 
 
 class CustomBackend(object):
 
     def authenticate(self, username=None, password=None, **kwargs):
-        UserModel = User
+        UserModel = get_user_model()
         if username is None:
             username = kwargs.get(UserModel.USERNAME_FIELD)
         try:
-            q = {UserModel.USERNAME_FIELD: username}
-            user = UserModel.objects(**q)[0]
+            user = UserModel.objects(**{UserModel.USERNAME_FIELD: username})[0]
             if user.check_password(password):
                 return user
         except IndexError:
@@ -19,7 +18,7 @@ class CustomBackend(object):
             UserModel().set_password(password)
 
     def get_user(self, user_id):
-        UserModel = User
+        UserModel = get_user_model()
         try:
             return UserModel.objects(id=user_id)[0]
         except IndexError:

@@ -16,11 +16,33 @@ to support full CRUD operations on Posts, updated to latest version of Angular, 
 Gulp task for javascript files concatenation and minification.
 
 ### mongo_sessions
-mongo_sessions is providing the mongodb engine for storing sessions. Copied form mongoengine 0.9 and adapted
+mongo_sessions is providing the mongodb engine for storing sessions. Copied form mongoengine 0.9 and adapted.
+Set SESSION_ENGINE to use it.
+
+    SESSION_ENGINE = 'mongo_sessions.engine'
 
 ### mongo_auth
 mongo_auth is providing an abstract User class and MongoDB persistence. The commands createsuperuser and changepassword are implemented.
-You need to subclass the AbstractUser class, add customizations and login/logout views. 
+You need to subclass the AbstractUser class, and add any customizations you prefer.
+Set AUTHENTICATION_BACKENDS to use it.
+
+    AUTHENTICATION_BACKENDS = ('mongo_auth.backend.CustomBackend', )
+
+Also set AUTH_USER_MODEL and AUTH_USER_MODEL_SERIALIZER to your app's User model and User serializer
+e.g.
+
+    AUTH_USER_MODEL = 'authentication.User'
+    AUTH_USER_MODEL_SERIALIZER = 'authentication.UserSerializer'
+
+mongo_auth is completely independent from the models of django.contrib.auth. 
+
+Set DRF's setting UNAUTHENTICATED_USER to:
+
+    'UNAUTHENTICATED_USER': 'mongo_auth.models.AnonymousUser'
+
+to eliminate any depreciation warnings deriving  from DRF trying to load django.contrib.auth.models.AnonymousUser
+
+Two views are provided for logging in and out users through the REST. Subclass and customize them as needed.
 
 ### gulpstatic 
 The gulpstatic app holds a management command for building static files with gulp first

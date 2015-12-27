@@ -101,4 +101,5 @@ ALLOWED_HOSTS = ['*']
 
 AUTHENTICATION_BACKENDS = ('mongo_auth.backend.CustomBackend', )
 AUTH_USER_MODEL = 'authentication.User'
+AUTH_USER_MODEL_SERIALIZER = 'authentication.UserSerializer'
 SESSION_ENGINE = 'mongo_sessions.engine'

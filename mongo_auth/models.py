@@ -79,7 +79,7 @@ class AbstractUser(Document):
         """
         Returns an HMAC of the password field.
         """
-        key_salt = "django.contrib.auth.models.AbstractBaseUser.get_session_auth_hash"
+        key_salt = "mongo_auth.models.AbstractUser.get_session_auth_hash"
         return salted_hmac(key_salt, self.password).hexdigest()
 
 

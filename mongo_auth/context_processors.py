@@ -10,7 +10,7 @@ def auth(request):
     if hasattr(request, 'user'):
         user = request.user
     else:
-        from authentication.models import AnonymousUser
+        from mongo_auth.models import AnonymousUser
         user = AnonymousUser()
 
     return {

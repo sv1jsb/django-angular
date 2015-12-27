@@ -1,11 +1,11 @@
 # coding=utf-8
 from django.utils.functional import SimpleLazyObject
-from mongo_auth import get_user as authentication_get_user
+from mongo_auth import get_user as mongo_auth_get_user
 
 
 def get_user(request):
     if not hasattr(request, '_cached_user'):
-        request._cached_user = authentication_get_user(request)
+        request._cached_user = mongo_auth_get_user(request)
     return request._cached_user
 
 
