@@ -11,12 +11,12 @@
         .module('django-angular.layout.controllers')
         .controller('IndexController', IndexController);
 
-    IndexController.$inject = ['$scope', 'Authentication', 'Posts', 'Snackbar'];
+    IndexController.$inject = ['$scope', 'Authentication', 'Posts', 'Snackbar', 'Material'];
 
     /**
      * @namespace IndexController
      */
-    function IndexController($scope, Authentication, Posts, Snackbar) {
+    function IndexController($scope, Authentication, Posts, Snackbar, Material) {
         var vm = this;
 
         vm.isAuthenticated = Authentication.isAuthenticated();
@@ -30,7 +30,9 @@
          * @memberOf django-angular.layout.controllers.IndexController
          */
         function activate() {
-            Posts.all().then(postsSuccessFn, postsErrorFn);
+            Posts.all()
+                .then(postsSuccessFn, postsErrorFn)
+                .finally(Material.init());
 
             $scope.$on('post.created', function (event, post) {
                 vm.posts.unshift(post);
