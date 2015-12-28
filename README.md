@@ -75,5 +75,6 @@ You can deploy with the help of uwsgi and serve static files with offloaded thre
 * `$ cd <project_root>`
 * `$ pip install uwsgi`
 * `$ ./manage.py buildstatic`
-* `$ uwsgi uwsgi.ini` (in project root)
+* `$ uwsgi uwsgi.ini`
+
 
