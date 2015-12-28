@@ -65,3 +65,15 @@ then calls django's collectstatic ignoring the static/javascripts directory.
 * `$ npm install`
 * `$ bower install`
 * `$ python manage.py runserver`
+
+## Deployment
+
+In order to test deployment workflow, a uwsgi.ini is provided.
+You can deploy with the help of uwsgi and serve static files with offloaded threads
+
+* `$ workon djangular`
+* `$ cd <project_root>`
+* `$ pip install uwsgi`
+* `$ ./manage.py buildstatic`
+* `$ uwsgi uwsgi.ini` (in project root)
+

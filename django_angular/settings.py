@@ -9,7 +9,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '$6(x*g_2g9l_*g8peb-@anl5^*8q!1w)k&e&2!i)t6$s8kia94')
 
-DEBUG = os.environ.get('DJANGO_DEBUG', True)
+DEBUG = os.environ.get('DJANGO_DEBUG', 'True') == 'True'
+
 INTERNAL_IPS = ('127.0.0.1',)
 
 INSTALLED_APPS = (
@@ -43,7 +44,7 @@ DATABASES = {
     },
 }
 
-mongoengine.connect('django_angular')
+mongoengine.connect('django_angular', connect=False)
 
 LANGUAGE_CODE = 'en-us'
 
