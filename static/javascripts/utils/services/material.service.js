@@ -31,26 +31,26 @@
 
         /**
          * @name init
-         * @desc calls material.init after last digest cucle
+         * @desc calls material.init with a time delay after last digest cycle
          * @memberOf django-angular.utils.services.Material
          */
         function init() {
             $timeout(function(){
                 $.material.init();
-            }, false)
+            }, 200, false)
         }
 
 
         /**
          * @name ripples
-         * @desc call material.ripples after last digest cycle
+         * @desc call material.ripples with a time delay after last digest cycle
          * @param {string} elem Optional element to apply ripples on
          * @memberOf django-angular.utils.services.Material
          */
         function ripples(elem) {
             $timeout(function(){
                 $.material.ripples(elem);
-            }, false)
+            }, 200, false)
         }
     }
 })($);
