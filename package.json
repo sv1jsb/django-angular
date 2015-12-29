@@ -7,5 +7,19 @@
     "gulp-ng-annotate": "^0.3.3",
     "gulp-uglify": "^1.0.1",
     "gulp-concat": "2.6.0"
+  },
+  "scripts": {
+    "prestart": "npm install",
+    "start": "http-server -a 0.0.0.0 -p 8000",
+
+    "pretest": "npm install",
+    "test": "node node_modules/karma/bin/karma start tests/angular/karma.conf.js",
+    "test-single-run": "node node_modules/karma/bin/karma start tests/angular/karma.conf.js  --single-run",
+
+    "preupdate-webdriver": "npm install",
+    "update-webdriver": "webdriver-manager update",
+
+    "preprotractor": "npm run update-webdriver",
+    "protractor": "protractor tests/angular/protractor-conf.js"
   }
 }
