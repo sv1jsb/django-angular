@@ -28,7 +28,7 @@ describe('layout', function () {
             scope = $rootScope.$new();
             ctrl = $controller('IndexController', {$scope: scope});
             $cookies = _$cookies_;
-            $cookies.put('authenticatedAccount', {username: "test", email: "test@test.com"});
+            $cookies.put('authenticatedAccount', JSON.stringify({username: "test", email: "test@test.com"}));
         }));
 
         it('should have one post from http', function () {
