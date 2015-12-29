@@ -8,6 +8,18 @@
     "gulp-uglify": "^1.0.1",
     "gulp-concat": "2.6.0"
   },
+  "devDependencies": {
+    "karma": "",
+    "karma-chrome-launcher": "",
+    "karma-firefox-launcher": "",
+    "karma-phantomjs-launcher": "",
+    "phantomjs": "",
+    "karma-jasmine": "",
+    "protractor": "",
+    "http-server": "",
+    "tmp": "",
+    "shelljs": ""
+  },
   "scripts": {
     "prestart": "npm install",
     "start": "http-server -a 0.0.0.0 -p 8000",
