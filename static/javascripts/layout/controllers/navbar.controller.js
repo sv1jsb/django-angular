@@ -16,9 +16,9 @@
     /**
      * @namespace NavbarController
      */
-    function NavbarController($route, Authentication, $location) {
+    function NavbarController($scope, Authentication, $location) {
         var vm = this;
-        $route.$on('$routeChangeSuccess', function(e, current, previous){
+        $scope.$on('$routeChangeSuccess', function(e, current, previous){
             vm.location = $location.path();
         });
         vm.logout = logout;
