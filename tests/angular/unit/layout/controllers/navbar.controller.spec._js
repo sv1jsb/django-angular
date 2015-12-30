@@ -46,4 +46,5 @@ describe('layout', function () {
             expect($cookies.getObject('authenticatedAccount')).toBeUndefined();
         });
     });
+
 });

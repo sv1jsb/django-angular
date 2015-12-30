@@ -9,13 +9,13 @@
         .module('django-angular.authentication.services')
         .factory('Authentication', Authentication);
 
-    Authentication.$inject = ['$cookies', '$http', 'Snackbar'];
+    Authentication.$inject = ['$cookies', '$http', 'Snackbar', '$window'];
 
     /**
      * @namespace Authentication
      * @returns {Factory}
      */
-    function Authentication($cookies, $http, Snackbar) {
+    function Authentication($cookies, $http, Snackbar, $window) {
         /**
          * @name Authentication
          * @desc The Factory to be returned
@@ -91,7 +91,7 @@
              */
             function loginSuccessFn(data, status, headers, config) {
                 Authentication.setAuthenticatedAccount(data.data);
-                window.location = '/';
+                $window.location = '/';
             }
 
             /**
@@ -119,7 +119,7 @@
              */
             function logoutSuccessFn(data, status, headers, config) {
                 Authentication.unauthenticate();
-                window.location = '/';
+                $window.location = '/';
             }
 
             /**

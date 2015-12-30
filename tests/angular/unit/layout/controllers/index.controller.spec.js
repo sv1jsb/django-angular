@@ -32,33 +32,33 @@ describe('layout', function () {
             ctrl = $controller('IndexController', {$scope: scope});
         }));
 
-        //it('should have one post from http', function () {
-        //    expect(ctrl.posts.length).toEqual(0);
-        //    $httpBackend.flush();
-        //    expect(ctrl.posts.length).toEqual(1);
-        //    $rootScope.$broadcast('post.created', post);
-        //    expect(ctrl.posts.length).toEqual(2);
-        //});
-        //it('should have one post from broadcast', function () {
-        //    expect(ctrl.posts.length).toEqual(0);
-        //    $rootScope.$broadcast('post.created', post);
-        //    expect(ctrl.posts.length).toEqual(1);
-        //});
-        //it('should have no post from broadcast error', function () {
-        //    expect(ctrl.posts.length).toEqual(0);
-        //    $rootScope.$broadcast('post.created', post);
-        //    expect(ctrl.posts.length).toEqual(1);
-        //    $rootScope.$broadcast('post.created.error');
-        //    expect(ctrl.posts.length).toEqual(0);
-        //});
-        //it('should update post', function () {
-        //    expect(ctrl.posts.length).toEqual(0);
-        //    $httpBackend.flush();
-        //    expect(ctrl.posts.length).toEqual(1);
-        //    post.content = "update from test";
-        //    $rootScope.$broadcast('post.updated', post);
-        //    expect(ctrl.posts[0].content).toBe("update from test");
-        //});
+        it('should have one post from http', function () {
+            expect(ctrl.posts.length).toEqual(0);
+            $httpBackend.flush();
+            expect(ctrl.posts.length).toEqual(1);
+            $rootScope.$broadcast('post.created', post);
+            expect(ctrl.posts.length).toEqual(2);
+        });
+        it('should have one post from broadcast', function () {
+            expect(ctrl.posts.length).toEqual(0);
+            $rootScope.$broadcast('post.created', post);
+            expect(ctrl.posts.length).toEqual(1);
+        });
+        it('should have no post from broadcast error', function () {
+            expect(ctrl.posts.length).toEqual(0);
+            $rootScope.$broadcast('post.created', post);
+            expect(ctrl.posts.length).toEqual(1);
+            $rootScope.$broadcast('post.created.error');
+            expect(ctrl.posts.length).toEqual(0);
+        });
+        it('should update post', function () {
+            expect(ctrl.posts.length).toEqual(0);
+            $httpBackend.flush();
+            expect(ctrl.posts.length).toEqual(1);
+            post.content = "update from test";
+            $rootScope.$broadcast('post.updated', post);
+            expect(ctrl.posts[0].content).toBe("update from test");
+        });
         it('should delete post', function () {
             expect(ctrl.posts.length).toEqual(0);
             $httpBackend.flush();
@@ -68,6 +68,6 @@ describe('layout', function () {
         });
         it('should be auth', function () {
             expect(ctrl.isAuthenticated).toBe(true);
-        })
+        });
     });
 });
