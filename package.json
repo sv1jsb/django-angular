@@ -2,6 +2,7 @@
     "name": "django_angular",
     "version": "1.0.0",
     "description": "Django Angular integration example",
+    "repository": "https://github.com/sv1jsb/django-amgular",
     "dependencies": {
         "gulp": "^3.8.9",
         "gulp-ng-annotate": "^0.3.3",
@@ -25,7 +26,7 @@
     "scripts": {
         "prestart": "npm install",
         "start": "http-server -a 0.0.0.0 -p 8000",
-        "pretest": "npm install",
+        "pretest": "npm install;gulp",
         "test": "node node_modules/karma/bin/karma start tests/angular/karma.conf.js",
         "test-single-run": "node node_modules/karma/bin/karma start tests/angular/karma.conf.js  --single-run",
         "preupdate-webdriver": "npm install",

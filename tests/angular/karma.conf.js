@@ -34,10 +34,6 @@ module.exports = function (config) {
             'karma-spec-reporter'
         ],
         reporters: ['spec'],
-        junitReporter: {
-            outputFile: 'test_out/unit.xml',
-            suite: 'unit'
-        }
-
+        singleRun: true
     });
 };
