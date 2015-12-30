@@ -16,6 +16,7 @@ module.exports = function (config) {
             'static/bower_components/ngDialog/js/ngDialog.js',
             'static/lib/snackbarjs/snackbar.min.js',
             'staticfiles/js/django-angular.min.js',
+            'tests/angular/lib/mocks.js',
             'tests/angular/unit/**/*.js'
         ],
 
@@ -29,9 +30,10 @@ module.exports = function (config) {
             'karma-chrome-launcher',
             'karma-firefox-launcher',
             'karma-jasmine',
-            'karma-phantomjs-launcher'
+            'karma-phantomjs-launcher',
+            'karma-spec-reporter'
         ],
-
+        reporters: ['spec'],
         junitReporter: {
             outputFile: 'test_out/unit.xml',
             suite: 'unit'

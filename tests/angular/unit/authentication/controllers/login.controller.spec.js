@@ -2,24 +2,17 @@
  * Created by andreas on 29/12/2015.
  */
 describe('authentication', function () {
-    var user = {username:"test", email:"test@test.com"};
-    var cookie = 'authenticatedAccount'
+    var user = mockUser;
+    var cookie = cookieAuthName;
     beforeEach(module('django-angular'));
 
     describe('LoginController', function () {
-        var scope, ctrl, $cookies, $location;
-        console.log("LoginController");
-        beforeEach(inject(function($rootScope, $controller, _$cookies_, _$location_) {
+        var scope, ctrl, $cookies, Authentication;
+        beforeEach(inject(function($rootScope, $controller, _$cookies_) {
             $cookies = _$cookies_;
             $cookies.remove(cookie);
-            $location = _$location_;
             scope = $rootScope.$new();
-            var Authentication = {
-                isAuthenticated: function(){return false},
-                login: function(email, password){
-                    $cookies.put(cookie, JSON.stringify(user));
-                }
-            };
+            Authentication = mockAuthentication(false);
             ctrl = $controller('LoginController', {$scope: scope, Authentication: Authentication});
         }));
 
@@ -32,7 +25,7 @@ describe('authentication', function () {
             ctrl.email = "test@test.com";
             ctrl.password = "test";
             ctrl.login();
-            expect($cookies.getObject(cookie)).toEqual(user);
+            expect(Authentication.username()).toEqual(user.username);
         });
 
     });

@@ -68,9 +68,7 @@
                 $location.url('/');
                 Snackbar.error('That user does not exist.');
             }
-
         }
-
 
         /**
          * @name destroy
@@ -86,11 +84,10 @@
              */
             function profileSuccessFn(data, status, headers, config) {
                 Authentication.unauthenticate();
-                window.location = '/';
+                $location.location = '/';
 
                 Snackbar.show('Your account has been deleted.');
             }
-
 
             /**
              * @name profileErrorFn
@@ -100,7 +97,6 @@
                 Snackbar.error(data.data.message);
             }
         }
-
 
         /**
          * @name update
@@ -121,7 +117,6 @@
                 Authentication.setAuthenticatedAccount(data.data);
                 Snackbar.show('Your profile has been updated.');
             }
-
 
             /**
              * @name profileErrorFn

@@ -52,7 +52,7 @@
             if($scope.post.author.username != vm.auth_user.username) {
                 $location.url('/');
                 Snackbar.error('You are not authorized to view this page.');
-            };
+            }
             Posts.delete(id).then(deletePostSuccessFn, deletePostErrorFn);
             /**
              * @name deletePostSuccessFn
