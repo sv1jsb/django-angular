@@ -1,7 +1,7 @@
 {
   "name": "django_angular",
-  "version": "0.0.0",
-  "homepage": "https://bitbucket.org/sv1jsb/django-angular.git",
+  "version": "1.0.0",
+  "homepage": "https://github.com/sv1jsb/django-angular",
   "license": "MIT",
   "ignore": [
     "**/.*",
