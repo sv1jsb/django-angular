@@ -7,7 +7,7 @@ describe('layout', function () {
 
     describe('NavbarController', function () {
         var scope, ctrl, $rootScope, $location;
-
+        console.log("NavbarController");
         beforeEach(inject(function(_$rootScope_, $controller, _$location_) {
 
             $rootScope = _$rootScope_;

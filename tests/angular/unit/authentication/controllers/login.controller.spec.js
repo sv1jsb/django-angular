@@ -8,15 +8,16 @@ describe('authentication', function () {
 
     describe('LoginController', function () {
         var scope, ctrl, $httpBackend, $cookies, $location;
-
+        console.log("LoginController");
         beforeEach(inject(function(_$httpBackend_, $rootScope, $controller, _$cookies_, _$location_) {
             $httpBackend = _$httpBackend_;
             $httpBackend.expectPOST('/api/v1/auth/login/')
                 .respond(200, JSON.stringify(user));
+            $cookies = _$cookies_;
+            $cookies.remove('authenticatedAccount');
+            $location = _$location_;
             scope = $rootScope.$new();
             ctrl = $controller('LoginController', {$scope: scope});
-            $cookies = _$cookies_;
-            $location = _$location_;
         }));
 
         it('should have error set', function(){
