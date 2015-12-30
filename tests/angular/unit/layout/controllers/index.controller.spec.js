@@ -29,10 +29,7 @@ describe('layout', function () {
             scope = $rootScope.$new();
             $cookies = _$cookies_;
             $cookies.put('authenticatedAccount', JSON.stringify({username: "test", email: "test@test.com"}));
-            var Material = {
-                init: function(){}
-            };
-            ctrl = $controller('IndexController', {$scope: scope, Material: Material});
+            ctrl = $controller('IndexController', {$scope: scope});
         }));
 
         //it('should have one post from http', function () {
