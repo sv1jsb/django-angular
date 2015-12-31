@@ -13,18 +13,21 @@ var mockUser = {
     tagline: "my tag"
 };
 
-var mockPost = {
-    id: "56812300887154364a163385",
-    author: {
-        id: "567b9a2e8871540f417329e4",
-        username: "test",
-        first_name: "Test",
-        last_name: "Account",
-        tagline: "my tag"
-    },
-    content: "new from test",
-    created_at: "2015-12-28T11:54:40.008000",
-    updated_at: null
+var mockPost = function() {
+    var obj = {
+        id: "56812300887154364a163385",
+        author: {
+            id: "567b9a2e8871540f417329e4",
+            username: "test",
+            first_name: "Test",
+            last_name: "Account",
+            tagline: "my tag"
+        },
+        content: "new from test",
+        created_at: "2015-12-28T11:54:40.008000",
+        updated_at: null
+    };
+    return obj;
 };
 
 var mockSnackbar = {
@@ -103,7 +106,7 @@ var mockAuthentication = function (auth) {
 };
 
 var mockPosts = function () {
-    var _posts = [mockPost];
+    var _posts = [new mockPost()];
 
     var obj = {
         all: all,

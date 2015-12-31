@@ -7,7 +7,7 @@ describe('profiles', function () {
 
     describe('ProfileController', function () {
         var scope, ctrl, $rootScope, MyPosts, MyProfile;
-        var post = mockPost;
+        var post = new mockPost();
         var user = mockUser;
         beforeEach(inject(function(_$rootScope_, $controller) {
 

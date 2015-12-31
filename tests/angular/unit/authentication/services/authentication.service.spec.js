@@ -46,9 +46,9 @@ describe('authentication', function(){
         })
     });
     describe('AuthenticationService helpers', function () {
-        var Authentication, $httpBackend;
+        var Authentication;
 
-        beforeEach(inject(function(_Authentication_, _$httpBackend_){
+        beforeEach(inject(function(_Authentication_){
             Authentication = _Authentication_;
         }));
         it('getAuthenticatedAccount should return user data', function(){

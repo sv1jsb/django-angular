@@ -7,7 +7,7 @@ describe('layout', function () {
 
     describe('IndexController', function () {
         var scope, ctrl, $httpBackend, $rootScope, MyPosts, MyAuthentication;
-        var post = mockPost;
+        var post = new mockPost();
         beforeEach(inject(function(_$httpBackend_, _$rootScope_, $controller) {
             $httpBackend = _$httpBackend_;
             $httpBackend.expectGET('/api/v1/posts/')

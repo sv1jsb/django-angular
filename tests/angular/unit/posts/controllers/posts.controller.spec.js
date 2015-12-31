@@ -18,7 +18,7 @@ describe('posts', function () {
             expect(ctrl.columns.length).toEqual(0);
         });
         it('should call watchCollection and have 1 column', function($timeout){
-            scope.posts.push(mockPost);
+            scope.posts.push(new mockPost());
             expect(scope.$watchCollection).toHaveBeenCalled();
             $timeout(function(){expect(ctrl.columns.length).toEqual(1)});
         });
