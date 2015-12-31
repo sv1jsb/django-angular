@@ -34,6 +34,6 @@ module.exports = function (config) {
             'karma-spec-reporter'
         ],
         reporters: ['spec'],
-        singleRun: true
+        singleRun: false
     });
 };
