@@ -86,7 +86,6 @@ describe('posts', function(){
             Posts = _Posts_;
             $httpBackend = _$httpBackend_;
             post = new mockPost();
-            post.content = "update post";
             $httpBackend.expectDELETE('/api/v1/posts/'+post.id+'/')
                 .respond(200, '');
         }));
