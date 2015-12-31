@@ -12,7 +12,7 @@ describe('posts', function () {
             scope = $rootScope.$new();
             scope.closeThisDialog = function(){};
             MyAuthentication = mockAuthentication(true);
-            MyAuthentication.setAuthenticatedAccount(mockUser);
+            MyAuthentication.setAuthenticatedAccount(new mockUser());
             MyPosts = mockPosts();
             spyOn($rootScope, '$broadcast').and.callThrough();
             MySnackBar = mockSnackbar;

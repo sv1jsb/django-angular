@@ -7,7 +7,7 @@ describe('profiles', function () {
 
     describe('ProfileSettingsController', function () {
         var scope, ctrl, $rootScope, MyProfile, MyAuthentication, MySnackbar, MyLocation;
-        var user = mockUser;
+        var user = new mockUser();
         beforeEach(inject(function(_$rootScope_, $controller) {
             $rootScope = _$rootScope_;
             scope = $rootScope.$new();

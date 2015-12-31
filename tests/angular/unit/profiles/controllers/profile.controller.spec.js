@@ -8,7 +8,7 @@ describe('profiles', function () {
     describe('ProfileController', function () {
         var scope, ctrl, $rootScope, MyPosts, MyProfile;
         var post = new mockPost();
-        var user = mockUser;
+        var user = new mockUser();
         beforeEach(inject(function(_$rootScope_, $controller) {
 
             $rootScope = _$rootScope_;
@@ -41,7 +41,7 @@ describe('profiles', function () {
 
     describe('ProfileController errors', function () {
         var scope, ctrl, $httpBackend, $rootScope, MySnackbar, Mylocation;
-        var user = mockUser;
+        var user = new mockUser();
         beforeEach(inject(function(_$httpBackend_, _$rootScope_, $controller) {
             $httpBackend = _$httpBackend_;
             $httpBackend.expectGET('/api/v1/users/' + user.id +'/')

@@ -4,13 +4,16 @@
 
 var cookieAuthName = 'authenticatedAccount';
 
-var mockUser = {
-    id: "567b9a2e8871540f417329e4",
-    username: "test",
-    email: "test@test.com",
-    first_name: "Test",
-    last_name: "Account",
-    tagline: "my tag"
+var mockUser = function(){
+    var obj = {
+        id: "567b9a2e8871540f417329e4",
+        username: "test",
+        email: "test@test.com",
+        first_name: "Test",
+        last_name: "Account",
+        tagline: "my tag"
+    };
+    return obj
 };
 
 var mockPost = function() {
@@ -81,7 +84,7 @@ var mockAuthentication = function (auth) {
     }
 
     function login(email, password) {
-        _user = mockUser;
+        _user = new mockUser();
     }
 
     function logout() {
@@ -139,7 +142,7 @@ var mockPosts = function () {
             then: function(success, fail){
                 var p = {
                     id: 'someID',
-                    author: mockUser,
+                    author: new mockUser(),
                     content: content
                 };
                 _posts.push(p);
@@ -219,7 +222,7 @@ var mockProfile = function () {
     function get(user_id) {
         var obj = {
             then: function(success, fail){
-                success({data: mockUser});
+                success({data: new mockUser()});
                 return obj;
             },
             finally: function(f){
@@ -232,7 +235,11 @@ var mockProfile = function () {
     function update(profile) {
         var obj = {
             then: function(success, fail){
-                success({data: mockUser});
+                u = new mockUser();
+                u.email = profile.email;
+                u.username = profile.username;
+                u.tagline = profile.tagline;
+                success({data: u});
                 return obj;
             }
         };

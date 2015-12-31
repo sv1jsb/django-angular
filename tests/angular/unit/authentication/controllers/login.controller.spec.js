@@ -2,7 +2,7 @@
  * Created by andreas on 29/12/2015.
  */
 describe('authentication', function () {
-    var user = mockUser;
+    var user = new mockUser();
     var cookie = cookieAuthName;
     beforeEach(module('django-angular'));
 

@@ -9,7 +9,7 @@ describe('posts', function () {
         var ctrl, scope, $rootScope, MyAuthentication, MyPosts, post;
         beforeEach(inject(function(_$rootScope_, $controller){
             MyAuthentication = mockAuthentication(true);
-            MyAuthentication.setAuthenticatedAccount(mockUser);
+            MyAuthentication.setAuthenticatedAccount(new mockUser());
             $rootScope = _$rootScope_;
             $rootScope.auth = MyAuthentication;
             scope = $rootScope.$new();
