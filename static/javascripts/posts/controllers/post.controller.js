@@ -11,16 +11,18 @@
         .module('django-angular.posts.controllers')
         .controller('PostController', PostController);
 
-    PostController.$inject = ['$scope', 'Authentication', 'ngDialog', 'Posts', '$rootScope', 'Snackbar'];
+    PostController.$inject = ['$scope', 'ngDialog', 'Posts', '$rootScope', 'Snackbar'];
 
     /**
      * @namespace PostController
      */
-    function PostController($scope, Authentication, ngDialog, Posts, $rootScope, Snackbar) {
+    function PostController($scope, ngDialog, Posts, $rootScope, Snackbar) {
         var vm = this;
-        vm.auth_user = Authentication.getAuthenticatedAccount();
         vm.modalOpen = modalOpen;
         vm.deletePost = deletePost;
+
+        // Assign this to $scope
+        $scope.auth = $rootScope.auth;
 
         /**
          * @name modalOpen
@@ -49,7 +51,7 @@
          */
         function deletePost(id) {
             // Check owner of Post
-            if($scope.post.author.username != vm.auth_user.username) {
+            if($scope.post.author.username != $scope.auth.getAuthenticatedAccount().username) {
                 $location.url('/');
                 Snackbar.error('You are not authorized to view this page.');
             }
