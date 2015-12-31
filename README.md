@@ -78,3 +78,15 @@ You can deploy with the help of uwsgi and serve static files with offloaded thre
 * `$ uwsgi uwsgi.ini`
 
 
+## Tests
+
+Included are tests for Angular. All tests are under the tests folder
+
+You can run them with:
+
+    npm test
+
+this will start the karma server and run the tests continuously.
+
+
+
