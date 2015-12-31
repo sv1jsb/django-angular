@@ -11,12 +11,12 @@
         .module('django-angular.posts.controllers')
         .controller('NewPostController', NewPostController);
 
-    NewPostController.$inject = ['$rootScope', '$scope', 'Authentication', 'Snackbar', 'Posts', 'Material'];
+    NewPostController.$inject = ['$rootScope', '$scope', 'Snackbar', 'Posts'];
 
     /**
      * @namespace NewPostController
      */
-    function NewPostController($rootScope, $scope, Authentication, Snackbar, Posts, Material) {
+    function NewPostController($rootScope, $scope, Snackbar, Posts) {
         var vm = this;
 
         vm.submit = submit;

@@ -12,3 +12,4 @@ static/bower_components/
 
 .idea/
 
+*debuglog.txt
