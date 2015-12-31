@@ -148,12 +148,24 @@ var mockPosts = function () {
     }
 
     function get(id) {
-        return _posts[0];
+        var obj = {
+            then: function(success, fail){
+                success({data:_posts[0]});
+                return obj;
+            }
+        };
+        return obj;
     }
 
     function update(id, content) {
-        _posts[0].content = content;
-        return _posts[0];
+        var obj = {
+            then: function(success, fail){
+                _posts[0].content = content;
+                success({data: _posts[0]});
+                return obj;
+            }
+        };
+        return obj;
     }
 
     function deletePost(id) {
