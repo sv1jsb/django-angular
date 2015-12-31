@@ -157,7 +157,14 @@ var mockPosts = function () {
     }
 
     function deletePost(id) {
-        _posts.shift();
+        var obj = {
+            then: function(success, fail){
+                _posts.shift();
+                success({});
+                return obj;
+            }
+        };
+        return obj;
     }
 
     function getUserPosts(user_id) {
