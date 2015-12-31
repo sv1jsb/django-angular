@@ -218,6 +218,9 @@ var mockProfile = function () {
             then: function(success, fail){
                 success({data: mockUser});
                 return obj;
+            },
+            finally: function(f){
+                return obj;
             }
         };
         return obj;

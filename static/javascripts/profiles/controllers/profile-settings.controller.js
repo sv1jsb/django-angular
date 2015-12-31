@@ -49,22 +49,22 @@
             }
 
             Profile.get(user_id)
-                .then(profileSuccessFn, profileErrorFn)
+                .then(profileGetSuccessFn, profileGetErrorFn)
                 .finally(Material.init());
 
             /**
-             * @name profileSuccessFn
+             * @name profileGetSuccessFn
              * @desc Update `profile` for view
              */
-            function profileSuccessFn(data, status, headers, config) {
+            function profileGetSuccessFn(data, status, headers, config) {
                 vm.profile = data.data;
             }
 
             /**
-             * @name profileErrorFn
+             * @name profileGetErrorFn
              * @desc Redirect to index
              */
-            function profileErrorFn(data, status, headers, config) {
+            function profileGetErrorFn(data, status, headers, config) {
                 $location.url('/');
                 Snackbar.error('That user does not exist.');
             }
@@ -76,24 +76,23 @@
          * @memberOf django-angular.profiles.controllers.ProfileSettingsController
          */
         function destroy() {
-            Profile.destroy(vm.profile.id).then(profileSuccessFn, profileErrorFn);
+            Profile.destroy(vm.profile.id).then(profileDestroySuccessFn, profileDestroyErrorFn);
 
             /**
-             * @name profileSuccessFn
+             * @name profileDestroySuccessFn
              * @desc Redirect to index and display success snackbar
              */
-            function profileSuccessFn(data, status, headers, config) {
+            function profileDestroySuccessFn(data, status, headers, config) {
                 Authentication.unauthenticate();
                 $location.location = '/';
-
                 Snackbar.show('Your account has been deleted.');
             }
 
             /**
-             * @name profileErrorFn
+             * @name profileDestroyErrorFn
              * @desc Display error snackbar
              */
-            function profileErrorFn(data, status, headers, config) {
+            function profileDestroyErrorFn(data, status, headers, config) {
                 Snackbar.error(data.data.message);
             }
         }
@@ -104,25 +103,26 @@
          * @memberOf django-angular.profiles.controllers.ProfileSettingsController
          */
         function update() {
-            if(!(vm.profile.email && vm.profile.username))
+            if(!(vm.profile.email && vm.profile.username)) {
                 $scope.error = 'Email and Username are required!';
-            else
-                Profile.update(vm.profile).then(profileSuccessFn, profileErrorFn);
+            } else {
+                Profile.update(vm.profile).then(profileUpdateSuccessFn, profileUpdateErrorFn);
+            }
 
             /**
-             * @name profileSuccessFn
+             * @name profileUpdateSuccessFn
              * @desc Show success snackbar
              */
-            function profileSuccessFn(data, status, headers, config) {
+            function profileUpdateSuccessFn(data, status, headers, config) {
                 Authentication.setAuthenticatedAccount(data.data);
                 Snackbar.show('Your profile has been updated.');
             }
 
             /**
-             * @name profileErrorFn
+             * @name profileUpdateErrorFn
              * @desc Show error snackbar
              */
-            function profileErrorFn(data, status, headers, config) {
+            function profileUpdateErrorFn(data, status, headers, config) {
                 Snackbar.error(data.data.message);
             }
         }
