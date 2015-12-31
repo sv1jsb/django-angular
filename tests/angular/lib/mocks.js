@@ -44,7 +44,7 @@ var mockLocation = {
         return this._path;
     },
     url: function(p){
-        this.path = p
+        this._path = p
     }
 };
 
