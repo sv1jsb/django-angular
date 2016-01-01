@@ -1,30 +1,29 @@
 {
-  "name": "django_angular",
-  "version": "1.0.0",
-  "description": "Django Angular integration example",
-  "repository": "https://github.com/sv1jsb/django-angular",
-  "dependencies": {
-    "gulp": "3.8.9",
-    "gulp-ng-annotate": "0.3.3",
-    "gulp-uglify": "1.0.1",
-    "gulp-concat": "2.6.0",
-    "gulp-sourcemaps": "1.6.0"
-  },
-  "devDependencies": {
-    "http-server": "0.8.5",
-    "karma": "0.13.16",
-    "karma-chrome-launcher": "0.2.2",
-    "karma-coverage": "^0.5.3",
-    "karma-firefox-launcher": "0.1.7",
-    "karma-jasmine": "0.3.6",
-    "karma-ng-html2js-preprocessor": "^0.2.0",
-    "karma-phantomjs-launcher": "0.2.2",
-    "karma-spec-reporter": "0.0.23",
-    "phantomjs": "1.9.19"
-  },
-  "scripts": {
-    "pretest": "npm install",
-    "test": "node node_modules/karma/bin/karma start tests/angular/karma.conf.js",
-    "test-ci": "node node_modules/karma/bin/karma start tests/angular/karma.conf.js  --no-single-run"
-  }
+    "name": "django_angular",
+    "version": "1.0.0",
+    "description": "Django Angular integration example",
+    "repository": "https://github.com/sv1jsb/django-angular",
+    "dependencies": {
+        "gulp": "3.8.9",
+        "gulp-ng-annotate": "0.3.3",
+        "gulp-uglify": "1.0.1",
+        "gulp-concat": "2.6.0",
+        "gulp-sourcemaps": "1.6.0"
+    },
+    "devDependencies": {
+        "http-server": "0.8.5",
+        "karma": "0.13.16",
+        "karma-chrome-launcher": "0.2.2",
+        "karma-coverage": "^0.5.3",
+        "karma-firefox-launcher": "0.1.7",
+        "karma-jasmine": "0.3.6",
+        "karma-ng-html2js-preprocessor": "^0.2.0",
+        "karma-phantomjs-launcher": "0.2.2",
+        "karma-spec-reporter": "0.0.23",
+        "phantomjs": "1.9.19"
+    },
+    "scripts": {
+        "pretest": "npm install",
+        "test": "node node_modules/karma/bin/karma start tests/angular/karma.conf.js"
+    }
 }
