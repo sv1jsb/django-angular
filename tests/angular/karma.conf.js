@@ -14,6 +14,7 @@ module.exports = function (config) {
             'static/bower_components/jquery/dist/jquery.js',
             'static/bower_components/underscore/underscore.js',
             'static/bower_components/ngDialog/js/ngDialog.js',
+            'static/templates/**/*.html',
             'static/lib/snackbarjs/snackbar.min.js',
             'staticfiles/js/django-angular.min.js',
             'tests/angular/lib/mocks.js',
@@ -31,8 +32,15 @@ module.exports = function (config) {
             'karma-firefox-launcher',
             'karma-jasmine',
             'karma-phantomjs-launcher',
-            'karma-spec-reporter'
+            'karma-spec-reporter',
+            'karma-ng-html2js-preprocessor'
         ],
+        preprocessors: {
+           'static/templates/**/*.html': ['ng-html2js']
+        },
+        ngHtml2JsPreprocessor: {
+            prependPrefix: "/"
+        },
         reporters: ['spec'],
         singleRun: false
     });
