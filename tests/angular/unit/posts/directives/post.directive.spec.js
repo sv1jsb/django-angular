@@ -1,9 +1,6 @@
 /**
  * Created by andreas on 1/1/2016.
  */
-/**
- * Created by andreas on 1/1/2016.
- */
 
 describe('posts', function(){
 
