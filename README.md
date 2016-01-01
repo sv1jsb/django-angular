@@ -85,7 +85,7 @@ You can run them with:
 
     npm test
     
-this will start the karma server and run the tests continuously.
+A *coverage* directory will be created with code coverage information.
 
 
 
