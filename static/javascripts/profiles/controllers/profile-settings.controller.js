@@ -41,16 +41,16 @@
                 // Redirect if logged in, but not the owner of this profile.
                 if (authenticatedAccount.id !== user_id) {
                     $location.url('/');
-                    Snackbar.error('You are not authorized to view this page.');
+                    Snackbar.error('Not your profile');
+                } else {
+                    Profile.get(user_id)
+                        .then(profileGetSuccessFn, profileGetErrorFn)
+                        .finally(Material.init());
                 }
             } else {
                 $location.url('/');
-                Snackbar.error('You are not authorized to view this page.');
+                Snackbar.error('You are not authorized to view this page');
             }
-
-            Profile.get(user_id)
-                .then(profileGetSuccessFn, profileGetErrorFn)
-                .finally(Material.init());
 
             /**
              * @name profileGetSuccessFn

@@ -11,12 +11,12 @@
         .module('django-angular.posts.controllers')
         .controller('EditPostController', EditPostController);
 
-    EditPostController.$inject = ['$rootScope', '$scope', 'Authentication', 'Snackbar', 'Posts', 'postId'];
+    EditPostController.$inject = ['$rootScope', '$scope', 'Authentication', 'Snackbar', 'Posts', 'postId', '$location'];
 
     /**
      * @namespace EditPostController
      */
-    function EditPostController($rootScope, $scope, Authentication, Snackbar, Posts, postId) {
+    function EditPostController($rootScope, $scope, Authentication, Snackbar, Posts, postId, $location) {
         var vm = this;
         vm.submit = submit;
         var authenticatedAccount = Authentication.getAuthenticatedAccount();
@@ -24,10 +24,10 @@
         if (!authenticatedAccount) {
             $location.url('/');
             Snackbar.error('You are not authorized to view this page.');
+        } else {
+            vm.post = null;
+            activate();
         }
-        vm.post = null;
-
-        activate();
         /**
          * @name activate
          * @desc Actions to be performed when this controller is instantiated
@@ -54,7 +54,7 @@
              * @desc Get post by id error
              */
             function postErrorFn(data, status, headers, config) {
-                Snackbar.error(data.data.error);
+                Snackbar.error(data.data.message);
             }
         }
 

@@ -96,4 +96,22 @@ describe('posts', function(){
             $httpBackend.flush();
         })
     });
+    describe('PostsService', function () {
+        var Posts, $httpBackend, post, user;
+
+        beforeEach(inject(function (_Posts_, _$httpBackend_) {
+            Posts = _Posts_;
+            $httpBackend = _$httpBackend_;
+            post = new mockPost();
+            user = new mockUser();
+            $httpBackend.expectGET('/api/v1/posts/?author_id=' + user.id)
+                .respond(200, [post]);
+        }));
+        it('\'getUserPosts\' should get the user\' posts', function () {
+            Posts.getUserPosts(user.id).then(function (response) {
+                expect(response.status).toEqual(200);
+            });
+            $httpBackend.flush();
+        })
+    });
 });

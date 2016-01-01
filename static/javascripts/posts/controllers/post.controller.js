@@ -11,12 +11,12 @@
         .module('django-angular.posts.controllers')
         .controller('PostController', PostController);
 
-    PostController.$inject = ['$scope', 'ngDialog', 'Posts', '$rootScope', 'Snackbar'];
+    PostController.$inject = ['$scope', 'ngDialog', 'Posts', '$rootScope', 'Snackbar', '$location'];
 
     /**
      * @namespace PostController
      */
-    function PostController($scope, ngDialog, Posts, $rootScope, Snackbar) {
+    function PostController($scope, ngDialog, Posts, $rootScope, Snackbar, $location) {
         var vm = this;
         vm.modalOpen = modalOpen;
         vm.deletePost = deletePost;
@@ -54,8 +54,9 @@
             if($scope.post.author.username != $scope.auth.getAuthenticatedAccount().username) {
                 $location.url('/');
                 Snackbar.error('You are not authorized to view this page.');
+            } else {
+                Posts.delete(id).then(deletePostSuccessFn, deletePostErrorFn);
             }
-            Posts.delete(id).then(deletePostSuccessFn, deletePostErrorFn);
             /**
              * @name deletePostSuccessFn
              * @desc Show snackbar with success message

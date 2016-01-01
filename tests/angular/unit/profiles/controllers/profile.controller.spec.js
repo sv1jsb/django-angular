@@ -10,7 +10,6 @@ describe('profiles', function () {
         var post = new mockPost();
         var user = new mockUser();
         beforeEach(inject(function(_$rootScope_, $controller) {
-
             $rootScope = _$rootScope_;
             scope = $rootScope.$new();
             var $routeParams = {
@@ -20,11 +19,11 @@ describe('profiles', function () {
             MyProfile = mockProfile();
             ctrl = $controller('ProfileController', {$scope: scope, $routeParams: $routeParams, Posts: MyPosts, Profile: MyProfile});
         }));
-        it('posts should be 0', function () {
+        it('should have 0 posts', function () {
             $rootScope.$broadcast('post.deleted', post);
             expect(ctrl.posts.length).toEqual(0);
         });
-        it('post should be updated', function () {
+        it('should update post', function () {
             post.content = "new content";
             $rootScope.$broadcast('post.updated', post);
             expect(ctrl.posts[0].content).toEqual("new content");
@@ -33,41 +32,86 @@ describe('profiles', function () {
             expect(ctrl.posts.length).toEqual(1);
             expect(ctrl.profile).toBeDefined();
         });
-        it('post should be deleted', function () {
+        it('should delete post', function () {
             $rootScope.$broadcast('post.deleted', post);
             expect(ctrl.posts.length).toEqual(0);
         });
     });
-
-    describe('ProfileController errors', function () {
-        var scope, ctrl, $httpBackend, $rootScope, MySnackbar, Mylocation;
+    describe('ProfileController', function () {
+        var scope, ctrl, $rootScope, MyPosts, MyProfile, MySnackbar, MyLocation;
         var user = new mockUser();
-        beforeEach(inject(function(_$httpBackend_, _$rootScope_, $controller) {
-            $httpBackend = _$httpBackend_;
-            $httpBackend.expectGET('/api/v1/users/' + user.id +'/')
-                .respond(400, '');
-            $httpBackend.expectGET('/api/v1/posts/?author_id=' + user.id)
-                .respond(400, JSON.stringify({message: 'errors in posts'}));
+        beforeEach(inject(function(_$rootScope_, $controller) {
             $rootScope = _$rootScope_;
             scope = $rootScope.$new();
             var $routeParams = {
                 user_id: "+" + user.id
             };
-            Mylocation = mockLocation;
+            MyPosts = mockPosts();
+            MyProfile = mockProfileError();
             MySnackbar = mockSnackbar;
-            ctrl = $controller('ProfileController', {$scope: scope, $routeParams: $routeParams,
-                                $location: Mylocation, Snackbar: MySnackbar});
+            MySnackbar.errorMessage = [];
+            MyLocation = mockLocation;
+            ctrl = $controller('ProfileController', {$scope: scope, $routeParams: $routeParams, Posts: MyPosts, Profile: MyProfile,
+                                                     Snackbar: MySnackbar, $location: MyLocation});
         }));
-        afterEach(function() {
-            $httpBackend.verifyNoOutstandingExpectation();
-            $httpBackend.verifyNoOutstandingRequest();
+        afterEach(function(){
+            MySnackbar.errorMessage = [];
         });
-
-        it('should display error message', function(){
-            $httpBackend.flush();
-            expect(MySnackbar.errorMessage[0]).toEqual('That user does not exist.');
-            expect(MySnackbar.errorMessage[1]).toEqual('errors in posts');
+        it('should display error message on profile get error', function () {
+            expect(MySnackbar.errorMessage).toContain('Could not get profile');
         });
     });
-
+    describe('ProfileController', function () {
+        var scope, ctrl, $rootScope, MyPosts, MyProfile, MySnackbar, MyLocation, post;
+        var user = new mockUser();
+        beforeEach(inject(function(_$rootScope_, $controller) {
+            $rootScope = _$rootScope_;
+            scope = $rootScope.$new();
+            var $routeParams = {
+                user_id: "+" + user.id
+            };
+            MyPosts = mockPosts();
+            MyPosts.create("second post").then(function(data){
+                post = data.data;
+            });
+            MyProfile = mockProfile();
+            MySnackbar = mockSnackbar;
+            MySnackbar.errorMessage = [];
+            MyLocation = mockLocation;
+            ctrl = $controller('ProfileController', {$scope: scope, $routeParams: $routeParams, Posts: MyPosts, Profile: MyProfile,
+                                                     Snackbar: MySnackbar, $location: MyLocation});
+        }));
+        afterEach(function(){
+            MySnackbar.errorMessage = [];
+        });
+        it('should delete the second post', function () {
+            $rootScope.$broadcast('post.deleted', post);
+            expect(ctrl.posts.length).toEqual(1);
+            expect(ctrl.posts[0].content).toEqual('new from test');
+        });
+    });
+    describe('ProfileController', function () {
+        var scope, ctrl, $rootScope, MyPosts, MyProfile, MySnackbar, MyLocation;
+        var user = new mockUser();
+        beforeEach(inject(function(_$rootScope_, $controller) {
+            $rootScope = _$rootScope_;
+            scope = $rootScope.$new();
+            var $routeParams = {
+                user_id: "+" + user.id
+            };
+            MyPosts = mockPostsError();
+            MyProfile = mockProfile();
+            MySnackbar = mockSnackbar;
+            MySnackbar.errorMessage = [];
+            MyLocation = mockLocation;
+            ctrl = $controller('ProfileController', {$scope: scope, $routeParams: $routeParams, Posts: MyPosts, Profile: MyProfile,
+                                                     Snackbar: MySnackbar, $location: MyLocation});
+        }));
+        afterEach(function(){
+            MySnackbar.errorMessage = [];
+        });
+        it('should display error message on posts get error', function () {
+            expect(MySnackbar.errorMessage).toContain('Could not get user\'s posts');
+        });
+    })
 });

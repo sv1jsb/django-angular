@@ -16,6 +16,18 @@ var mockUser = function(){
     return obj
 };
 
+var mockUser2 = function(){
+    var obj = {
+        id: "567b9a2e8871540f417329e5",
+        username: "alt-test",
+        email: "alt-test@alt-test.com",
+        first_name: "Alt",
+        last_name: "Test",
+        tagline: "alt tag"
+    };
+    return obj
+};
+
 var mockPost = function() {
     var obj = {
         id: "56812300887154364a163385",
@@ -196,6 +208,86 @@ var mockPosts = function () {
     }
 };
 
+var mockPostsError = function () {
+    var _posts = [new mockPost()];
+
+    var obj = {
+        all: all,
+        create: create,
+        get: get,
+        update: update,
+        delete: deletePost,
+        getUserPosts: getUserPosts
+    };
+
+    return obj;
+
+    ////////////////////
+
+    function all() {
+        var obj = {
+            then: function(success, fail){
+                fail({data: {message: "Could not retrieve posts"}});
+                return obj;
+            },
+            finally: function(f){
+                return obj;
+            }
+        };
+        return obj;
+    }
+
+    function create(content) {
+        var obj = {
+            then: function(success, fail){
+                fail({data: {message: "Could not create post"}});
+                return obj;
+            }
+        };
+        return obj;
+    }
+
+    function get(id) {
+        var obj = {
+            then: function(success, fail){
+                fail({data: {message: "Could not get post"}});
+                return obj;
+            }
+        };
+        return obj;
+    }
+
+    function update(id, content) {
+        var obj = {
+            then: function(success, fail){
+                fail({data: {message: "Could not update post"}});
+                return obj;
+            }
+        };
+        return obj;
+    }
+
+    function deletePost(id) {
+        var obj = {
+            then: function(success, fail){
+                fail({data: {message: "Could not delete post"}});
+                return obj;
+            }
+        };
+        return obj;
+    }
+
+    function getUserPosts(user_id) {
+        var obj = {
+            then: function(success, fail){
+                fail({data: {message: "Could not get user's posts"}});
+                return obj;
+            }
+        };
+        return obj;
+    }
+};
+
 var mockProfile = function () {
 
     var obj = {
@@ -244,5 +336,61 @@ var mockProfile = function () {
             }
         };
         return obj;
+    }
+};
+
+var mockProfileError = function () {
+
+    var obj = {
+        destroy: destroy,
+        get: get,
+        update: update
+    };
+
+    return obj;
+
+    /////////////////////
+
+    function destroy(username) {
+        var obj = {
+            then: function(success, fail){
+                fail({data: {message: 'Could not delete profile'}});
+                return obj;
+            }
+        };
+        return obj;
+
+    }
+
+    function get(user_id) {
+        var obj = {
+            then: function(success, fail){
+                fail({data: {message: 'Could not get profile'}});
+                return obj;
+            },
+            finally: function(f){
+                return obj;
+            }
+        };
+        return obj;
+    }
+
+    function update(profile) {
+        var obj = {
+            then: function(success, fail){
+                fail({data: {message: 'Could not update profile'}});
+                return obj;
+            }
+        };
+        return obj;
+    }
+};
+
+var mockNgDialog = function(){
+    return {
+        open: function(o){
+            this.opened = o.resolve.postId();
+        },
+        opened: null
     }
 };

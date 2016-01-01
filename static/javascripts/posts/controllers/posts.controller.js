@@ -44,11 +44,11 @@
          */
         function calculateNumberOfColumns() {
             var width = $(window).width();
-
+                            /* istanbul ignore if */
             if (width >= 1200) {
-                return 4;
+                return 4;   /* istanbul ignore if */
             } else if (width >= 992) {
-                return 3;
+                return 3;   /* istanbul ignore if */
             } else if (width >= 768) {
                 return 2;
             } else {

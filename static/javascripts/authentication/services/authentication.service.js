@@ -65,7 +65,7 @@
 
             /**
              * @name registerErrorFn
-             * @desc Log "Epic failure!" to the console
+             * @desc Displays snackbar with error message
              */
             function registerErrorFn(data, status, headers, config) {
                 Snackbar.error(data.data.message);
@@ -129,7 +129,7 @@
              * @desc Log "Epic failure!" to the console
              */
             function logoutErrorFn(data, status, headers, config) {
-                console.error('Epic failure!');
+                Snackbar.error(data.data.message);
             }
         }
 

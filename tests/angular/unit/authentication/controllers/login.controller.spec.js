@@ -27,6 +27,21 @@ describe('authentication', function () {
             ctrl.login();
             expect(Authentication.username()).toEqual(user.username);
         });
-
     });
+    describe('LoginController', function () {
+        var scope, ctrl, $cookies, Authentication, MyLocation;
+        beforeEach(inject(function($rootScope, $controller, _$cookies_) {
+            $cookies = _$cookies_;
+            $cookies.remove(cookie);
+            scope = $rootScope.$new();
+            MyLocation = mockLocation;
+            Authentication = mockAuthentication(true);
+            ctrl = $controller('LoginController', {$scope: scope, Authentication: Authentication, $location: MyLocation});
+        }));
+
+        it('should redirect to index if already logged in ', function(){
+            expect(MyLocation.path()).toEqual('/');
+        });
+    });
+
 });
