@@ -400,3 +400,7 @@ var mockWindow = {
         return true;
     }
 };
+
+var mockTimeout = function(f, time, digest){
+    f();
+};

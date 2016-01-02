@@ -7,6 +7,8 @@ module.exports = function (config) {
         files: [
             'static/bower_components/jquery/dist/jquery.js',
             'static/bower_components/underscore/underscore.js',
+            'static/bower_components/bootstrap-material-design/dist/js/material.js',
+            'static/bower_components/bootstrap-material-design/dist/js/ripples.js',
             'static/bower_components/angular/angular.js',
             'static/bower_components/angular-route/angular-route.js',
             'static/bower_components/angular-cookies/angular-cookies.js',
@@ -38,7 +40,7 @@ module.exports = function (config) {
         ],
         preprocessors: {
             'static/templates/**/*.html': ['ng-html2js'],
-            'static/javascripts/**/*.js': ['coverage']
+            'static/javascripts/**/!(*spec).js': ['coverage']
         },
         ngHtml2JsPreprocessor: {
             prependPrefix: "/"
