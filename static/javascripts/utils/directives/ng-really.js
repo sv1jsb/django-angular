@@ -11,10 +11,11 @@
         .module('django-angular.utils.directives')
         .directive('ngReallyClick', ngReallyClick);
 
+    ngReallyClick.$inject = ['$window'];
     /**
      * @namespace ngReallyClick
      */
-    function ngReallyClick() {
+    function ngReallyClick($window) {
         /**
          * @name Directive to display comfirmation alert
          * @desc The directive to be returned
@@ -25,7 +26,7 @@
             link: function(scope, element, attrs) {
                 element.bind('click', function() {
                     var message = attrs.ngReallyMessage;
-                    if (message && confirm(message)) {
+                    if (message && $window.confirm(message)) {
                         scope.$apply(attrs.ngReallyClick);
                     }
                 });

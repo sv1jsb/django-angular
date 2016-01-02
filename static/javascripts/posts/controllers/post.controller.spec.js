@@ -6,7 +6,7 @@ describe('posts', function () {
     beforeEach(module('django-angular'));
 
     describe('PostController', function () {
-        var ctrl, scope, $rootScope, MyAuthentication, MyPosts, post, MyNgDialog;
+        var ctrl, scope, $rootScope, MyAuthentication, MyPosts, post, MyNgDialog, MySnackbar;
         beforeEach(inject(function(_$rootScope_, $controller){
             MyAuthentication = mockAuthentication(true);
             MyAuthentication.setAuthenticatedAccount(new mockUser());
@@ -17,9 +17,15 @@ describe('posts', function () {
             scope.post = post;
             MyPosts = mockPosts();
             MyNgDialog = mockNgDialog();
+            MySnackbar = mockSnackbar;
+            MySnackbar.errorMessage = [];
             spyOn($rootScope, '$broadcast').and.callThrough();
-            ctrl = $controller('PostController', {$scope: scope, Authentication: MyAuthentication, Posts: MyPosts, ngDialog: MyNgDialog});
+            ctrl = $controller('PostController', {$scope: scope, Authentication: MyAuthentication, Posts: MyPosts,
+                                                  ngDialog: MyNgDialog, Snackbar: MySnackbar});
         }));
+        afterEach(function(){
+            MySnackbar.errorMessage = [];
+        });
         it('should delete the post', function(){
             ctrl.deletePost(post.id);
             expect($rootScope.$broadcast).toHaveBeenCalled();

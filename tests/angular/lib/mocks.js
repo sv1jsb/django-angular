@@ -394,3 +394,9 @@ var mockNgDialog = function(){
         opened: null
     }
 };
+
+var mockWindow = {
+    confirm: function(msg) {
+        return true;
+    }
+};
