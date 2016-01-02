@@ -14,15 +14,15 @@ module.exports = function (config) {
             'static/bower_components/ngDialog/js/ngDialog.js',
             'static/templates/**/*.html',
             'static/lib/snackbarjs/snackbar.min.js',
+            'tests/angular/lib/mocks.js',
             'static/javascripts/django-angular.js',
             'static/javascripts/authentication/authentication.module.js',
             'static/javascripts/layout/layout.module.js',
             'static/javascripts/posts/posts.module.js',
             'static/javascripts/profiles/profiles.module.js',
             'static/javascripts/utils/utils.module.js',
-            'static/javascripts/**/*.js',
-            'tests/angular/lib/mocks.js',
-            'tests/angular/unit/**/*.js'
+            'static/javascripts/**/*.js'
+
         ],
         autoWatch: true,
         frameworks: ['jasmine'],
