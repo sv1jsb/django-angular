@@ -1,6 +1,7 @@
 # coding=utf-8
 from datetime import datetime
 from bson.objectid import ObjectId
+from django.shortcuts import Http404
 from rest_framework import permissions, status, parsers, renderers
 from rest_framework_mongoengine.viewsets import ModelViewSet
 from rest_framework.response import Response
@@ -31,6 +32,14 @@ class PostsView(ModelViewSet):
             return PostSerializer
         else:
             return PostSerializerNonAuth
+
+    def get_object(self):
+        try:
+            post = Post.objects(id=self.kwargs['id'])[0]
+        except IndexError:
+            raise Http404
+        self.check_object_permissions(self.request, post)
+        return post
 
     def list(self, request, *args, **kwargs):
         if request.GET.get('author_id'):

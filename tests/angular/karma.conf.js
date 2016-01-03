@@ -45,6 +45,10 @@ module.exports = function (config) {
         ngHtml2JsPreprocessor: {
             prependPrefix: "/"
         },
+        coverageReporter: {
+            dir: 'coverage',
+            subdir: 'angular'
+        },
         reporters: ['spec', 'coverage'],
         singleRun: true
     });

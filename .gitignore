@@ -14,3 +14,4 @@ static/bower_components/
 
 *debuglog.txt
 coverage/
+.coverage

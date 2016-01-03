@@ -30,6 +30,7 @@ class UsersView(ModelViewSet):
             user = User.objects(id=self.kwargs['id'])[0]
         except IndexError:
             raise Http404
+        self.check_object_permissions(self.request, user)
         return user
 
     def get_permissions(self):
@@ -49,7 +50,7 @@ class UsersView(ModelViewSet):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             user = serializer.save()
-            return Response(user.to_json(), status=status.HTTP_201_CREATED)
+            return Response({"id": str(user.id)}, status=status.HTTP_201_CREATED, content_type="application/json")
         return Response({
             'status': 'Bad request',
             'message': 'Account could not be created with received data.'

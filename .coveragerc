@@ -1,0 +1,9 @@
+[run]
+source=authentication,posts,mongo_sessions,mongo_auth
+
+[report]
+omit=mongo_auth/management/commands/createsuperuser.py,mongo_auth/management/commands/changepassword.py,
+     mongo_sessions/engine.py,mongo_auth/__init__.py,mongo_auth/models.py,mongo_auth/context_processors.py
+
+[html]
+directory=coverage/drf

@@ -80,12 +80,12 @@ You can deploy with the help of uwsgi and serve static files with offloaded thre
 
 ## Tests
 
-Included are tests for Angular.
+Included are tests for Angular and DRF.
 You can run them with:
 
     npm test
     
-A *coverage* directory will be created with code coverage information.
+A *coverage* directory will be created with code coverage information in *angular* and *drf* subdirs.
 
 
 
