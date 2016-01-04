@@ -19,5 +19,15 @@
     </div>
 
     {% include 'javascripts.html' %}
+        {% comment %}
+      <script type="text/javascript">
+
+      var evtSrc = new EventSource("/subscribe");
+
+      evtSrc.onmessage = function(e) {
+          console.log(e.data);
+      };
+      </script>
+      {% endcomment %}
 </body>
 </html>

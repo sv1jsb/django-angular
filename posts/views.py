@@ -1,6 +1,8 @@
 # coding=utf-8
 from datetime import datetime
 from bson.objectid import ObjectId
+import redis
+from django.apps import apps
 from django.shortcuts import Http404
 from rest_framework import permissions, status, parsers, renderers
 from rest_framework_mongoengine.viewsets import ModelViewSet
@@ -14,6 +16,10 @@ class PostsView(ModelViewSet):
     parser_classes = (parsers.JSONParser,)
     renderer_classes = (renderers.JSONRenderer,)
     queryset = Post.objects
+
+    def __init__(self, **kwargs):
+        super(PostsView, self).__init__(**kwargs)
+        self.redis_con = apps.get_app_config('posts').redis_con
 
     def get_permissions(self):
         if self.request.method in permissions.SAFE_METHODS:
@@ -54,6 +60,7 @@ class PostsView(ModelViewSet):
             post = Post(**serializer.validated_data)
             post.author = request.user
             post.save()
+            self.redis_con.publish('new_post', post.id)
             serializer = PostSerializer(post)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response({

@@ -22,6 +22,7 @@ INSTALLED_APPS = (
     'authentication',
     'gulpstatic',
     'posts',
+    'sse_posts',
 )
 
 MIDDLEWARE_CLASSES = (
