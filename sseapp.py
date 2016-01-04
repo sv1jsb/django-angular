@@ -23,13 +23,23 @@ def application(e, start_response):
     start_response('200 OK', headers)
     # enter the loop
     while True:
+        time.sleep(1)
         message = pubsub.get_message(ignore_subscribe_messages=True)
-
-        if message:
+        if message and message['type'] == 'message':
             post = db.post.find_one({"_id": ObjectId(message['data'])})
             author = db.user.find_one({"_id": ObjectId(post['author'])})
-            post['author'] = author
-            print post
-            #session.add_message('message', json.dumps(post))
-        time.sleep(1)
-        yield str(session)
+            ret = {
+                "id": str(post["_id"]),
+                "content": post["content"],
+                "author": {
+                    "id": str(author["_id"]),
+                    "username": author["username"],
+                    "first_name": author.get("first_name", None),
+                    "last_name": author.get("last_name", None),
+                    "tagline": author.get("tagline", None)
+                }
+            }
+            session.add_message('message', json.dumps(ret))
+            yield str(session)
+
+

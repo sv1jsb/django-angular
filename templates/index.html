@@ -19,7 +19,6 @@
     </div>
 
     {% include 'javascripts.html' %}
-        {% comment %}
       <script type="text/javascript">
 
       var evtSrc = new EventSource("/subscribe");
@@ -28,6 +27,5 @@
           console.log(e.data);
       };
       </script>
-      {% endcomment %}
 </body>
 </html>
