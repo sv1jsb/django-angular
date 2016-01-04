@@ -3,4 +3,4 @@ djangorestframework
 mongoengine==0.10.5
 pymongo==3.2
 -e git+https://github.com/umutbozkurt/django-rest-framework-mongoengine.git#egg=django-rest-framework-mongoengine
-
+coverage

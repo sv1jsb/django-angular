@@ -23,7 +23,6 @@
     },
     "scripts": {
         "pretest": "npm install",
-        "test": "node node_modules/karma/bin/karma start tests/angular/karma.conf.js",
-        "posttest": "coverage run manage.py test; coverage html"
+        "test": "node node_modules/karma/bin/karma start tests/angular/karma.conf.js"
     }
 }
