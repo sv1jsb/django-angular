@@ -11,12 +11,12 @@
         .module('django-angular.layout.controllers')
         .controller('IndexController', IndexController);
 
-    IndexController.$inject = ['$scope', 'Authentication', 'Posts', 'Snackbar', 'Material'];
+    IndexController.$inject = ['$rootScope', '$scope', 'Authentication', 'Posts', 'Snackbar', 'Material', 'Sse'];
 
     /**
      * @namespace IndexController
      */
-    function IndexController($scope, Authentication, Posts, Snackbar, Material) {
+    function IndexController($rootScope, $scope, Authentication, Posts, Snackbar, Material, Sse) {
         var vm = this;
 
         vm.isAuthenticated = Authentication.isAuthenticated();
@@ -33,9 +33,16 @@
             Posts.all()
                 .then(postsSuccessFn, postsErrorFn)
                 .finally(Material.init());
-
-            $scope.$on('post.created', function (event, post) {
-                vm.posts.unshift(post);
+            Sse.addOnPostCreated();
+            $scope.$on('post.created', function (event, data) {
+                var found = false;
+                for (var i = 0; i < vm.posts.length; i++) {
+                    if (vm.posts[i].id == data.id) {
+                        found = true;
+                        break
+                    }
+                }
+                if(!found) vm.posts.unshift(data);
             });
 
             $scope.$on('post.created.error', function () {

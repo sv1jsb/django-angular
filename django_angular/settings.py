@@ -105,3 +105,5 @@ AUTHENTICATION_BACKENDS = ('mongo_auth.backend.CustomBackend', )
 AUTH_USER_MODEL = 'authentication.User'
 AUTH_USER_MODEL_SERIALIZER = 'authentication.UserSerializer'
 SESSION_ENGINE = 'mongo_sessions.engine'
+
+ENABLE_SSE = os.environ.get('DJANGO_ENABLE_SSE', 'False') == 'True'

@@ -1,7 +1,7 @@
 # coding=utf-8
 from datetime import datetime
 from bson.objectid import ObjectId
-import redis
+import json
 from django.apps import apps
 from django.shortcuts import Http404
 from rest_framework import permissions, status, parsers, renderers
@@ -60,7 +60,10 @@ class PostsView(ModelViewSet):
             post = Post(**serializer.validated_data)
             post.author = request.user
             post.save()
-            self.redis_con.publish('new_post', post.id)
+            try:
+                self.redis_con.publish('new_post', json.dumps({"post.created": str(post.id)}))
+            except Exception as e:
+                print e
             serializer = PostSerializer(post)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response({

@@ -25,8 +25,11 @@ def application(e, start_response):
     while True:
         time.sleep(1)
         message = pubsub.get_message(ignore_subscribe_messages=True)
-        if message and message['type'] == 'message':
-            post = db.post.find_one({"_id": ObjectId(message['data'])})
+        if message:
+            msg = json.loads(message['data'])
+            msg_type = msg.keys()[0]
+            msg_data = msg.values()[0]
+            post = db.post.find_one({"_id": ObjectId(msg_data)})
             author = db.user.find_one({"_id": ObjectId(post['author'])})
             ret = {
                 "id": str(post["_id"]),
@@ -39,7 +42,10 @@ def application(e, start_response):
                     "tagline": author.get("tagline", None)
                 }
             }
-            session.add_message('message', json.dumps(ret))
+            session.add_message(msg_type, json.dumps(ret))
             yield str(session)
+        else:
+            session.flush()
+            yield ''
 
 

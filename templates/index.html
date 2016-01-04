@@ -19,13 +19,6 @@
     </div>
 
     {% include 'javascripts.html' %}
-      <script type="text/javascript">
 
-      var evtSrc = new EventSource("/subscribe");
-
-      evtSrc.onmessage = function(e) {
-          console.log(e.data);
-      };
-      </script>
 </body>
 </html>
