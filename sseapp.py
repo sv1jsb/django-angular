@@ -6,16 +6,23 @@ import redis
 import uwsgi
 from bson import ObjectId
 from pymongo import MongoClient
+from django_angular.settings import REDIS_SSE_CHANNEL, MONGO_DB_NAME
 
 
 def application(e, start_response):
     session = Sse()
+    # set retry to 10 sec
     session.set_retry(10000)
+
+    # connect to redis
     redis_con = redis.StrictRedis()
     pubsub = redis_con.pubsub()
-    pubsub.subscribe('posts_channel')
+    pubsub.subscribe(REDIS_SSE_CHANNEL)
+
+    # connect to mongo
     mongo = MongoClient()
-    db = mongo.django_angular
+    db = mongo[MONGO_DB_NAME]
+
     headers = []
     headers.append(('Content-Type', 'text/event-stream'))
     headers.append(('Cache-Control', 'no-cache'))

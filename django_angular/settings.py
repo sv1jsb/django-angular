@@ -45,7 +45,9 @@ DATABASES = {
     },
 }
 
-mongoengine.connect('django_angular', connect=False)
+MONGO_DB_NAME = 'django_angular'
+
+mongoengine.connect(MONGO_DB_NAME, connect=False)
 
 LANGUAGE_CODE = 'en-us'
 

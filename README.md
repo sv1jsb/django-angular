@@ -1,4 +1,4 @@
-# django-rest-angular-mongo
+# django-rest-angular-mongo & SSE
 
 ## DRAM for sort
 
@@ -16,7 +16,7 @@ to support full CRUD operations on Posts, updated to latest version of Angular, 
 Gulp task for javascript files concatenation and minification.
 
 ### mongo_sessions
-mongo_sessions is providing the mongodb engine for storing sessions. Copied form mongoengine 0.9 and adapted.
+mongo_sessions is providing the mongodb engine for storing sessions. Copied from mongoengine 0.9 and adapted.
 Set SESSION_ENGINE to use it.
 
     SESSION_ENGINE = 'mongo_sessions.engine'
@@ -40,7 +40,7 @@ Set DRF's setting UNAUTHENTICATED_USER to:
 
     'UNAUTHENTICATED_USER': 'mongo_auth.models.AnonymousUser'
 
-to eliminate any depreciation warnings deriving  from DRF trying to load django.contrib.auth.models.AnonymousUser
+to eliminate any depreciation warnings deriving from DRF trying to load django.contrib.auth.models.AnonymousUser
 
 Two views are provided for logging in and out users through the REST. Subclass and customize them as needed.
 
@@ -77,6 +77,21 @@ You can deploy with the help of uwsgi and serve static files with offloaded thre
 * `$ ./manage.py buildstatic`
 * `$ uwsgi uwsgi.ini`
 
+## Server Send Events
+
+There is also support for Server Send Events and live update of posts with Angular.
+The SSE server is a wsgi app *sseapp.py* which can be started with uwsgi
+To start the SSE server first make sure the *DJANGO_ENABLE_SSE* is *True* in uwsgi.ini. Then in a separate terminal:
+
+* `$ workon djangular`
+* `$ cd <project_root>`
+* `$ uwsgi uwsgi_sse.ini`
+
+Then load/reload the app in two separate browsers, login as two separate users,
+and watch the posts change in one when you create/update/delete posts in the other.
+Posts are updated even at the *profile* page of a user, thanks to Angular's $rootScope.$broadcast method.
+
+This is, on purpose,  a simple setup without the use of nginx. It can be easily modified for deployment behind an nginx server.
 
 ## Tests
 
@@ -86,6 +101,9 @@ You can run them with:
     npm test
     
 A *coverage* directory will be created with code coverage information in *angular* and *drf* subdirs.
+Custom mock objects are used but there a lot of libraries out there which can do a better job.
 
+Have fun with this project and experiment. Enjoy!
 
+Andreas
 

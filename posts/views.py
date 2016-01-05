@@ -4,6 +4,7 @@ from bson.objectid import ObjectId
 import json
 from django.apps import apps
 from django.shortcuts import Http404
+from django.conf import settings
 from rest_framework import permissions, status, parsers, renderers
 from rest_framework_mongoengine.viewsets import ModelViewSet
 from rest_framework.response import Response
@@ -19,7 +20,8 @@ class PostsView(ModelViewSet):
 
     def __init__(self, **kwargs):
         super(PostsView, self).__init__(**kwargs)
-        self.redis_con = apps.get_app_config('posts').redis_con
+        if settings.ENABLE_SSE:
+            self.redis_con = apps.get_app_config('posts').redis_con
 
     def get_permissions(self):
         if self.request.method in permissions.SAFE_METHODS:
@@ -60,10 +62,8 @@ class PostsView(ModelViewSet):
             post = Post(**serializer.validated_data)
             post.author = request.user
             post.save()
-            try:
-                self.redis_con.publish('posts_channel', json.dumps({"post.created": str(post.id)}))
-            except Exception as e:
-                pass
+            if settings.ENABLE_SSE:
+                self.redis_con.publish(settings.REDIS_SSE_CHANNEL, json.dumps({"post.created": str(post.id)}))
             serializer = PostSerializer(post)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response({
@@ -78,10 +78,8 @@ class PostsView(ModelViewSet):
             post = serializer.save()
             post.updated_at = datetime.utcnow()
             post.save()
-            try:
-                self.redis_con.publish('posts_channel', json.dumps({"post.updated": str(post.id)}))
-            except Exception as e:
-                pass
+            if settings.ENABLE_SSE:
+                self.redis_con.publish(settings.REDIS_SSE_CHANNEL, json.dumps({"post.updated": str(post.id)}))
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response({
                     'status': 'Failed',
@@ -92,8 +90,6 @@ class PostsView(ModelViewSet):
         post = self.get_object()
         post_id = post.id
         post.delete()
-        try:
-            self.redis_con.publish('posts_channel', json.dumps({"post.deleted": str(post_id)}))
-        except Exception as e:
-            pass
+        if settings.ENABLE_SSE:
+            self.redis_con.publish(settings.REDIS_SSE_CHANNEL, json.dumps({"post.deleted": str(post_id)}))
         return Response(status=status.HTTP_204_NO_CONTENT)

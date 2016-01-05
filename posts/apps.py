@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.apps import AppConfig
 from django.conf import settings
-import redis
+
 
 class PostsConfig(AppConfig):
     """
@@ -12,4 +12,5 @@ class PostsConfig(AppConfig):
 
     def ready(self):
         if settings.ENABLE_SSE:
+            import redis
             self.redis_con = redis.StrictRedis()

@@ -15,7 +15,7 @@
     function Sse($rootScope, $timeout) {
         /**
          * @name Sse
-         * @desc The factory to be returned
+         * @desc Register event listeners for the three main event types and return the eventSource object
          */
         var evtSrc = new EventSource("/subscribe");
         evtSrc.addEventListener('post.created', function(event){
