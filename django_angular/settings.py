@@ -107,3 +107,4 @@ AUTH_USER_MODEL_SERIALIZER = 'authentication.UserSerializer'
 SESSION_ENGINE = 'mongo_sessions.engine'
 
 ENABLE_SSE = os.environ.get('DJANGO_ENABLE_SSE', 'False') == 'True'
+REDIS_SSE_CHANNEL = 'posts_channel'

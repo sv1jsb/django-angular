@@ -3,12 +3,14 @@ from sse import Sse
 import json
 import time
 import redis
+import uwsgi
 from bson import ObjectId
 from pymongo import MongoClient
 
 
 def application(e, start_response):
     session = Sse()
+    session.set_retry(10000)
     redis_con = redis.StrictRedis()
     pubsub = redis_con.pubsub()
     pubsub.subscribe('posts_channel')
@@ -18,7 +20,8 @@ def application(e, start_response):
     headers.append(('Content-Type', 'text/event-stream'))
     headers.append(('Cache-Control', 'no-cache'))
     start_response('200 OK', headers)
-    while True:
+    sse_fd = uwsgi.connection_fd()
+    while uwsgi.is_connected(sse_fd):
         time.sleep(1)
         session.flush()
         message = pubsub.get_message(ignore_subscribe_messages=True)
@@ -42,7 +45,6 @@ def application(e, start_response):
                 }
             else:
                 ret = {"id": msg_data}
-                print ret
             session.add_message(msg_type, json.dumps(ret))
         else:
             session.add_message('p', '')

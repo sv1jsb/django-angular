@@ -19,14 +19,14 @@
          */
         var evtSrc = new EventSource("/subscribe");
         evtSrc.addEventListener('post.created', function(event){
-            $timeout(function(){$rootScope.$broadcast('post.created', angular.fromJson(event.data));});
-        }, false);
+            $timeout(function(){$rootScope.$broadcast('post.created', angular.fromJson(event.data))});
+        });
         evtSrc.addEventListener('post.updated', function(event){
-            $timeout(function(){$rootScope.$broadcast('post.updated', angular.fromJson(event.data));});
-        }, false);
+            $timeout(function(){$rootScope.$broadcast('post.updated', angular.fromJson(event.data))});
+        });
         evtSrc.addEventListener('post.deleted', function(event){
-            $timeout(function(){$rootScope.$broadcast('post.delete', angular.fromJson(event.data));});
-        }, false);
+            $timeout(function(){$rootScope.$broadcast('post.deleted', angular.fromJson(event.data))});
+        });
 
         var Sse = {
             evtSrc: evtSrc
