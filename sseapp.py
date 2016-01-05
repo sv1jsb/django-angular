@@ -8,22 +8,19 @@ from pymongo import MongoClient
 
 
 def application(e, start_response):
-    print e
-    # create the SSE session
     session = Sse()
-    # prepare HTTP headers
     redis_con = redis.StrictRedis()
     pubsub = redis_con.pubsub()
-    pubsub.subscribe('new_post')
+    pubsub.subscribe('posts_channel')
     mongo = MongoClient()
     db = mongo.django_angular
     headers = []
-    headers.append(('Content-Type','text/event-stream'))
-    headers.append(('Cache-Control','no-cache'))
+    headers.append(('Content-Type', 'text/event-stream'))
+    headers.append(('Cache-Control', 'no-cache'))
     start_response('200 OK', headers)
-    # enter the loop
     while True:
         time.sleep(1)
+        session.flush()
         message = pubsub.get_message(ignore_subscribe_messages=True)
         if message:
             msg = json.loads(message['data'])
@@ -43,9 +40,6 @@ def application(e, start_response):
                 }
             }
             session.add_message(msg_type, json.dumps(ret))
-            yield str(session)
         else:
-            session.flush()
-            yield ''
-
-
+            session.add_message('p', '')
+        yield str(session)

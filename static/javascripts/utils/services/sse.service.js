@@ -18,23 +18,20 @@
          * @desc The factory to be returned
          */
         var evtSrc = new EventSource("/subscribe");
+        evtSrc.addEventListener('post.created', function(event){
+            $timeout(function(){$rootScope.$broadcast('post.created', angular.fromJson(event.data));});
+        }, false);
+        evtSrc.addEventListener('post.updated', function(event){
+            $timeout(function(){$rootScope.$broadcast('post.updated', angular.fromJson(event.data));});
+        }, false);
+        evtSrc.addEventListener('post.deleted', function(event){
+            $timeout(function(){$rootScope.$broadcast('post.delete');});
+        }, false);
+
         var Sse = {
-            addOnPostCreated: onPostCreated
+            evtSrc: evtSrc
         };
 
         return Sse;
-
-        //////////////////////
-
-        /**
-         * @name onPostCreated
-         * @desc sets an event listener n the specified type of received event
-         * @memberOf django-angular.utils.services.Sse
-         */
-        function onPostCreated() {
-            evtSrc.addEventListener('post.created', function(event){
-                $timeout(function(){$rootScope.$broadcast('post.created', angular.fromJson(event.data));});
-            }, false);
-        }
     }
 })();

@@ -61,9 +61,9 @@ class PostsView(ModelViewSet):
             post.author = request.user
             post.save()
             try:
-                self.redis_con.publish('new_post', json.dumps({"post.created": str(post.id)}))
+                self.redis_con.publish('posts_channel', json.dumps({"post.created": str(post.id)}))
             except Exception as e:
-                print e
+                pass
             serializer = PostSerializer(post)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response({
@@ -78,6 +78,10 @@ class PostsView(ModelViewSet):
             post = serializer.save()
             post.updated_at = datetime.utcnow()
             post.save()
+            try:
+                self.redis_con.publish('posts_channel', json.dumps({"post.updated": str(post.id)}))
+            except Exception as e:
+                pass
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response({
                     'status': 'Failed',
