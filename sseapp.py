@@ -26,19 +26,23 @@ def application(e, start_response):
             msg = json.loads(message['data'])
             msg_type = msg.keys()[0]
             msg_data = msg.values()[0]
-            post = db.post.find_one({"_id": ObjectId(msg_data)})
-            author = db.user.find_one({"_id": ObjectId(post['author'])})
-            ret = {
-                "id": str(post["_id"]),
-                "content": post["content"],
-                "author": {
-                    "id": str(author["_id"]),
-                    "username": author["username"],
-                    "first_name": author.get("first_name", None),
-                    "last_name": author.get("last_name", None),
-                    "tagline": author.get("tagline", None)
+            if msg_type != "post.deleted":
+                post = db.post.find_one({"_id": ObjectId(msg_data)})
+                author = db.user.find_one({"_id": ObjectId(post['author'])})
+                ret = {
+                    "id": str(post["_id"]),
+                    "content": post["content"],
+                    "author": {
+                        "id": str(author["_id"]),
+                        "username": author["username"],
+                        "first_name": author.get("first_name", None),
+                        "last_name": author.get("last_name", None),
+                        "tagline": author.get("tagline", None)
+                    }
                 }
-            }
+            else:
+                ret = {"id": msg_data}
+                print ret
             session.add_message(msg_type, json.dumps(ret))
         else:
             session.add_message('p', '')

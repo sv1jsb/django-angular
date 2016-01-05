@@ -25,7 +25,7 @@
             $timeout(function(){$rootScope.$broadcast('post.updated', angular.fromJson(event.data));});
         }, false);
         evtSrc.addEventListener('post.deleted', function(event){
-            $timeout(function(){$rootScope.$broadcast('post.delete');});
+            $timeout(function(){$rootScope.$broadcast('post.delete', angular.fromJson(event.data));});
         }, false);
 
         var Sse = {

@@ -87,3 +87,13 @@ class PostsView(ModelViewSet):
                     'status': 'Failed',
                     'message': 'Update failed with submitted data'
                 }, status=status.HTTP_400_BAD_REQUEST)
+
+    def destroy(self, request, *args, **kwargs):
+        post = self.get_object()
+        post_id = post.id
+        post.delete()
+        try:
+            self.redis_con.publish('posts_channel', json.dumps({"post.deleted": str(post_id)}))
+        except Exception as e:
+            pass
+        return Response(status=status.HTTP_204_NO_CONTENT)
