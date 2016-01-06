@@ -92,7 +92,7 @@ Then you need to run the following command in order to download and compile the 
     uwsgi --build-plugin https://github.com/unbit/uwsgi-sse-offload
     
 
-Run the server with *uwsgi uwsgi.ini* and load the app in two separate browsers, login as two separate users,
+Run the server with *uwsgi uwsgi.ini* and load the app in two separate browsers (e.g. chrome, firefox), login as two separate users,
 and watch the posts change in one when you create/update/delete posts in the other.
 Posts are updated even at the *profile* page of a user, thanks to Angular.
 
