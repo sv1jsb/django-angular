@@ -5,7 +5,7 @@
 This is a boilerplate and starter project for using the Django Rest Framework with Angular and MongoDB.
 It uses all the latest (by the time of this writing) versions of the various requirements.
 It's a simple register/login/create-post project to demonstrate the use of Angular with a REST api and
-the use of MongoDB from DRF. It also has an option to enable Server Send Events and update the posts in real time.
+the use of MongoDB from DRF. It also has an option to enable Server Sent Events and update the posts in real time.
 
 It contains a session engine for storing sessions in Mongo and a custom authentication application with an adaptable User model.
 
@@ -77,9 +77,9 @@ You can deploy with the help of uwsgi and serve static files with offloaded thre
 * `$ ./manage.py buildstatic`
 * `$ uwsgi uwsgi.ini`
 
-## Server Send Events
+## Server Sent Events
 
-There is also support for Server Send Events and real time update of posts with Angular.
+There is also support for Server Sent Events and real time update of posts with Angular.
 The SSE server is using an offload plugin from the uwsgi project [uwsgi-sse-offload](https://github.com/unbit/uwsgi-sse-offload).
 You will also need to have redis installed and running. 
 To enable edit uwsgi.ini and change DJANGO_ENABLE_SSE to True, and uncomment the lines:
