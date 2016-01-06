@@ -15,18 +15,17 @@
     function Sse($rootScope, $timeout) {
         /**
          * @name Sse
-         * @desc Register event listeners for the three main event types and return the eventSource object
+         * @desc Register onmessage listener and return the eventSource object
          */
         var evtSrc = new EventSource("/subscribe");
-        evtSrc.addEventListener('post.created', function(event){
-            $timeout(function(){$rootScope.$broadcast('post.created', angular.fromJson(event.data))});
-        });
-        evtSrc.addEventListener('post.updated', function(event){
-            $timeout(function(){$rootScope.$broadcast('post.updated', angular.fromJson(event.data))});
-        });
-        evtSrc.addEventListener('post.deleted', function(event){
-            $timeout(function(){$rootScope.$broadcast('post.deleted', angular.fromJson(event.data))});
-        });
+        evtSrc.onmessage = function(event){
+            try {
+                var msg = JSON.parse(event.data);
+                $timeout(function () {
+                    $rootScope.$broadcast(msg.event, msg.data)
+                });
+            } catch(e){}
+        };
 
         var Sse = {
             evtSrc: evtSrc

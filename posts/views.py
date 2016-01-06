@@ -63,7 +63,7 @@ class PostsView(ModelViewSet):
             post.author = request.user
             post.save()
             if settings.ENABLE_SSE:
-                self.redis_con.publish(settings.REDIS_SSE_CHANNEL, json.dumps({"post.created": str(post.id)}))
+                self.redis_con.publish(settings.REDIS_SSE_CHANNEL, sse_event("post.created", post))
             serializer = PostSerializer(post)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response({
@@ -79,7 +79,7 @@ class PostsView(ModelViewSet):
             post.updated_at = datetime.utcnow()
             post.save()
             if settings.ENABLE_SSE:
-                self.redis_con.publish(settings.REDIS_SSE_CHANNEL, json.dumps({"post.updated": str(post.id)}))
+                self.redis_con.publish(settings.REDIS_SSE_CHANNEL, sse_event("post.updated", post))
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response({
                     'status': 'Failed',
@@ -91,5 +91,34 @@ class PostsView(ModelViewSet):
         post_id = post.id
         post.delete()
         if settings.ENABLE_SSE:
-            self.redis_con.publish(settings.REDIS_SSE_CHANNEL, json.dumps({"post.deleted": str(post_id)}))
+            self.redis_con.publish(settings.REDIS_SSE_CHANNEL, sse_event("post.deleted", str(post_id)))
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+def sse_event(event, data):
+    """
+    Helper for publishing event data to redis to be picked up by SSE
+    :param event: The event name
+    :param data: post data to sent
+    :return: json string of event and data
+    """
+    try:
+        if event == "post.deleted":
+            buf = json.dumps({"event": event, "data": {"id": data}})
+        else:
+
+            ret = {
+                "id": str(data.id),
+                "content": data.content,
+                "author": {
+                    "id": str(data.author.id),
+                    "username": data.author.username,
+                    "first_name": data.author.first_name,
+                    "last_name": data.author.last_name,
+                    "tagline": data.author.tagline
+                }
+            }
+            buf = json.dumps({"event": event, "data": ret})
+    except:
+        buf = ''
+    return buf
