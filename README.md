@@ -106,7 +106,7 @@ You can run them with:
     npm test
     
 A *coverage* directory will be created with code coverage information in *angular* and *drf* subdirs.
-Custom mock objects are used but there a lot of libraries out there which can do a better job.
+Custom mock objects for Angular are used but there a lot of libraries out there which can do a better job.
 
 Have fun with this project and experiment. Enjoy!
 
