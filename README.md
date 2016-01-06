@@ -100,7 +100,7 @@ This is, on purpose, a simple setup without the use of nginx. It can be easily m
 
 ## Tests
 
-Included are tests for Angular and DRF.
+There are also tests included for Angular and DRF.
 You can run them with:
 
     npm test
