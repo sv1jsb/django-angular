@@ -29,13 +29,14 @@ def application(e, start_response):
     start_response('200 OK', headers)
     sse_fd = uwsgi.connection_fd()
     while uwsgi.is_connected(sse_fd):
-        time.sleep(1)
+        time.sleep(2)
         session.flush()
         message = pubsub.get_message(ignore_subscribe_messages=True)
         if message:
             msg = json.loads(message['data'])
             msg_type = msg.keys()[0]
             msg_data = msg.values()[0]
+            # Query mongo for post and author and construct the object to send
             if msg_type != "post.deleted":
                 post = db.post.find_one({"_id": ObjectId(msg_data)})
                 author = db.user.find_one({"_id": ObjectId(post['author'])})
@@ -54,5 +55,6 @@ def application(e, start_response):
                 ret = {"id": msg_data}
             session.add_message(msg_type, json.dumps(ret))
         else:
+            # Nothing received from redis, send a ping to keep the feed alive
             session.add_message('p', '')
         yield str(session)

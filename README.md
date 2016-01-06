@@ -81,9 +81,11 @@ You can deploy with the help of uwsgi and serve static files with offloaded thre
 
 There is also support for Server Send Events and live update of posts with Angular.
 The SSE server is a wsgi app *sseapp.py* which can be started with uwsgi
-To start the SSE server first make sure the *DJANGO_ENABLE_SSE* is *True* in uwsgi.ini. Then in a separate terminal:
+To start the SSE server you will need *redis* running and make sure the *DJANGO_ENABLE_SSE* is *True* in uwsgi.ini. Then in a separate terminal
+install the additional requirements and run the sse server.
 
 * `$ workon djangular`
+* `$ pip install -r requirements.txt`
 * `$ cd <project_root>`
 * `$ uwsgi uwsgi_sse.ini`
 
@@ -91,7 +93,7 @@ Then load/reload the app in two separate browsers, login as two separate users,
 and watch the posts change in one when you create/update/delete posts in the other.
 Posts are updated even at the *profile* page of a user, thanks to Angular's $rootScope.$broadcast method.
 
-This is, on purpose,  a simple setup without the use of nginx. It can be easily modified for deployment behind an nginx server.
+This is, on purpose, a simple setup without the use of nginx. It can be easily modified for deployment behind an nginx server.
 
 ## Tests
 
