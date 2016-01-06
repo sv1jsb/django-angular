@@ -16,3 +16,4 @@ static/bower_components/
 coverage/
 .coverage
 logs/
+sse_offload_plugin.so

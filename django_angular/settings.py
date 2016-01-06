@@ -21,8 +21,7 @@ INSTALLED_APPS = (
     'rest_framework_mongoengine',
     'authentication',
     'gulpstatic',
-    'posts',
-    'sse_posts',
+    'posts'
 )
 
 MIDDLEWARE_CLASSES = (
