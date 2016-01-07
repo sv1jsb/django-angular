@@ -4,7 +4,7 @@
     "description": "Django Angular integration example",
     "repository": "https://github.com/sv1jsb/django-angular",
     "dependencies": {
-        "gulp": "3.8.9",
+        "gulp": "3.9.0",
         "gulp-ng-annotate": "0.3.3",
         "gulp-uglify": "1.0.1",
         "gulp-concat": "2.6.0"
