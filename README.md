@@ -101,10 +101,16 @@ This is, on purpose, a simple setup without the use of nginx. It can be easily m
 ## Tests
 
 There are also tests included for Angular and DRF.
-You can run them with:
+You can run the Angular test with:
 
     npm test
     
+And the DRF tests with the standard django test runner. A Mongoengine TestCase is provided for
+setting up, and tearing down, a test mongo database.
+
+    ./manage.py test
+
+
 A *coverage* directory will be created with code coverage information in *angular* and *drf* subdirs.
 Custom mock objects for Angular are used but there a lot of libraries out there which can do a better job.
 
