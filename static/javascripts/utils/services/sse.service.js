@@ -30,7 +30,6 @@
         var Sse = {
             evtSrc: evtSrc
         };
-
         return Sse;
     }
 })();

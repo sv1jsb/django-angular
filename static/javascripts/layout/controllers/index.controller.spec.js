@@ -18,7 +18,7 @@ describe('layout', function () {
 
         it('should have created one post', function () {
             $rootScope.$broadcast('post.created', post);
-            expect(ctrl.posts.length).toEqual(2);
+            expect(ctrl.posts.length).toEqual(1);
         });
         it('should have no post from broadcast error', function () {
             expect(ctrl.posts.length).toEqual(1);
@@ -34,7 +34,7 @@ describe('layout', function () {
             $rootScope.$broadcast('post.deleted', post);
             expect(ctrl.posts.length).toEqual(0);
         });
-        it('should be auth', function () {
+        it('user should be authenticated', function () {
             expect(ctrl.isAuthenticated).toBe(true);
         });
     });
