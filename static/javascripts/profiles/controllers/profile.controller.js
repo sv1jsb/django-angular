@@ -34,6 +34,16 @@
 
             Profile.get(user_id).then(profileSuccessFn, profileErrorFn);
             Posts.getUserPosts(user_id).then(postsSuccessFn, postsErrorFn);
+            $scope.$on('post.created', function (event, data) {
+                var found = false;
+                for (var i = 0; i < vm.posts.length; i++) {
+                    if (vm.posts[i].id == data.id) {
+                        found = true;
+                        break
+                    }
+                }
+                if(!found) vm.posts.unshift(data);
+            });
             $scope.$on('post.updated', function (event, data) {
                 for (var i = 0; i < vm.posts.length; i++) {
                     if (vm.posts[i].id == data.id) {
